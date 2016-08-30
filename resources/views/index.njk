@@ -1,0 +1,22 @@
+{% extends 'master' %}
+
+{% block content %}
+  <h1>Főoldal</h1>
+
+  {% for movie in movies %}
+    <div class="list-group">
+      <a href="#" class="list-group-item">
+        <h4 class="list-group-item-heading">{{ movie.title }} ({{ movie.releaseDate }})</h4>
+        <p class="list-group-item-text">
+          <ul>
+            {% for actor in movie.actors %}
+            <li>{{ actor.firstname }} {{ actor.lastname }} ({{ actor.dateOfBirth }})</li>
+            {% endfor %}
+          </ul>
+        </p>
+      </a>
+    </div>
+  {% endfor %}
+
+
+{% endblock %}
