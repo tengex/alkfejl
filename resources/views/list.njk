@@ -1,12 +1,119 @@
 {% extends 'master' %}
 
 {% block content %}
-<h1>Lista</h1>
-{% for employee in employees %}
-<div class="list-group">
-<p class="list-group-item-text">
-{{ employee.username }} {{ employee.fullname }} {{ employee.gender }} {{ employee.email }} {{ employee.telephone }} {{ employee.is_active}}
-</p>
-</div>
-{% endfor %}
+{% if type == "employees" %}
+    <h1>Lista: dolgozók</h1>
+    <table style="width:100%">
+    <tr>
+        <th>Id</th>
+        <th>Felhasználói név</th>
+        <th>Teljes név</th>
+        <th>Nem</th>
+        <th>Email</th>
+        <th>Telefon</th>
+        <th>Aktív</th>
+    </tr>
+    {% for employee in employees %}
+    <tr>
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.username }}</td>
+        <td>{{ employee.fullname }}</td>
+        <td>{% if employee.gender == 1 %} Férfi {% elif employee.gender == 2 %} Nő {% endif %}</td>
+        <td>{{ employee.email }}</td>
+        <td>{{ employee.telephone }}</td>
+        <td>{% if employee.is_active %} Aktív {% else %} Inaktív {% endif %}</td>
+    </tr>
+    {% endfor %}
+    </table>
+{% elif type == "vehicles" %}
+    <h1>Lista: járművek</h1>
+    <table style="width:100%">
+    <tr>
+        <th>Id</th>
+        <th>Rendszám</th>
+        <th>Gyártó</th>
+        <th>Típus</th>
+        <th>Kategória</th>
+        <th>Elérhető</th>
+        <th>Aktív</th>
+    </tr>
+    {% for vehicle in vehicles %}
+    <tr>
+        <td>{{ vehicle.id }}</td>
+        <td>{{ vehicle.license_plate }}</td>
+        <td>{{ vehicle.manufacturer }}</td>
+        <td>{{ vehicle.type }}</td>
+        <td>{{ vehicle.category }}</td>
+        <td>{% if vehicle.is_available %} Szabad {% else %} Foglalt {% endif %}</td>
+        <td>{% if vehicle.is_active %} Aktív {% else %} Inaktív {% endif %}</td>
+    </tr>
+    {% endfor %}
+    </table>
+{% elif type == "sites" %}
+    <h1>Lista: telephelyek</h1>
+    <table style="width:100%">
+    <tr>
+        <th>Id</th>
+        <th>Név</th>
+        <th>Ország</th>
+        <th>Város</th>
+        <th>Cím</th>
+        <th>Irányítószám</th>
+    </tr>
+    {% for site in sites %}
+    <tr>
+        <td>{{ site.id }}</td>
+        <td>{{ site.name }}</td>
+        <td>{{ site.country }}</td>
+        <td>{{ site.city }}</td>
+        <td>{{ site.address }}</td>
+        <td>{{ site.zip }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+{% elif type == "trips" %}
+    <h1>Lista: túrák</h1>
+    <table style="width:100%">
+    <tr>
+        <th>Id</th>
+        <th>Honnan</th>
+        <th>Hova</th>
+        <th>Dolgozó</th>
+        <th>Szállítmány</th>
+        <th>Jármű</th>
+        <th>Kezdés</th>
+        <th>Befejezés</th>
+    </tr>
+    {% for trip in trips %}
+    <tr>
+        <td>{{ trip.id }}</td>
+        <td>{{ trip.from_site }}</td>
+        <td>{{ trip.to_site }}</td>
+        <td>{{ trip.employee }}</td>
+        <td>{{ trip.shipment }}</td>
+        <td>{{ trip.vehicle }}</td>
+        <td>{{ trip.start_date }}</td>
+        <td>{{ trip.end_date }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+{% elif type == "shipments" %}
+    <h1>Lista: szállítmányok</h1>
+    <table style="width:100%">
+    <tr>
+        <th>Id</th>
+        <th>Leírás</th>
+        <th>Típus</th>
+        <th>Súly</th>
+    </tr>
+    {% for shipment in shipments %}
+    <tr>
+        <td>{{ shipment.id }}</td>
+        <td>{{ shipment.summary }}</td>
+        <td>{{ shipment.type }}</td>
+        <td>{{ shipment.weight }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+{% endif %}
 {% endblock %}
