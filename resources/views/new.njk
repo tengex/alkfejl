@@ -1,0 +1,178 @@
+{% extends 'master' %}
+{% block content %}
+<ul>
+    {% for error in old('errors') %}
+      <li>{{ error.message }}</li>
+    {% endfor %}
+  </ul>
+<form class="form-horizontal" method="POST">
+    {{ csrfField }}
+  <fieldset>
+    {% if typeName=="employee" %}
+        <legend>Új dolgozó</legend>
+        <div class="form-group">
+        <label for="username" class="col-lg-2 control-label">Felhasználónév</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputUsername" name="username" value="{{ old('username') }}" placeholder="Felhasználónév">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="fullname" class="col-lg-2 control-label">Teljes név</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputFullname" name="fullname" value="{{ old('fullname') }}" placeholder="Teljes név">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="gender" class="col-lg-2 control-label">Nem</label>
+        <div class="col-lg-10">
+            <input type="radio" id="inputGender" name="gender" value=1 checked="checked"> Férfi
+            <input type="radio" id="inputGender" name="gender" value=2> Nő
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="email" class="col-lg-2 control-label">Email</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputEmail" name="email" value="{{ old('email') }}" placeholder="Email">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="telephone" class="col-lg-2 control-label">Telefon</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputTelephone" name="telephone" value="{{ old('telephone') }}" placeholder="Telefon">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="inputPassword" class="col-lg-2 control-label">Jelszó</label>
+        <div class="col-lg-10">
+            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Jelszó">
+        </div>
+        </div>
+    {% elif typeName=="vehicle" %}
+        <legend>Új jármű</legend>
+        <div class="form-group">
+        <label for="license_plate" class="col-lg-2 control-label">Rendszám</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputLicense_plate" name="license_plate" value="{{ old('license_plate') }}" placeholder="Rendszám">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="manufacturer" class="col-lg-2 control-label">Gyártó</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputManufacturer" name="manufacturer" value="{{ old('manufacturer') }}" placeholder="Gyártó">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="type" class="col-lg-2 control-label">Típus</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputType" name="type" value="{{ old('type') }}" placeholder="Típus">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="category" class="col-lg-2 control-label">Kategória</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputCategory" name="category" value="{{ old('category') }}" placeholder="Kategória">
+        </div>
+        </div>
+    {# {% elif typeName=="site" %}
+        <legend>Új telephely</legend>
+        <div class="form-group">
+        <label for="username" class="col-lg-2 control-label">Felhasználónév</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputUsername" name="username" value="{{ old('username') }}" placeholder="Felhasználónév">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="fullname" class="col-lg-2 control-label">Teljes név</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputFullname" name="fullname" value="{{ old('fullname') }}" placeholder="Teljes név">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="gender" class="col-lg-2 control-label">Nem</label>
+        <div class="col-lg-10">
+            <input type="radio" id="inputGender" name="gender" value=1 checked="checked"> Férfi
+            <input type="radio" id="inputGender" name="gender" value=2> Nő
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="email" class="col-lg-2 control-label">Email</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputEmail" name="email" value="{{ old('email') }}" placeholder="Email">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="telephone" class="col-lg-2 control-label">Telefon</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputTelephone" name="telephone" value="{{ old('telephone') }}" placeholder="Telefon">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="inputPassword" class="col-lg-2 control-label">Jelszó</label>
+        <div class="col-lg-10">
+            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Jelszó">
+        </div>
+        </div> #}
+    {% elif typeName=="trip" %}
+        <legend>Új túra</legend>
+        <div class="form-group">
+        <label for="from_site" class="col-lg-2 control-label">Honnan</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputFrom_site" name="from_site" value="{{ old('from_site') }}" placeholder="Honnan">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="to_site" class="col-lg-2 control-label">Hova</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputTo_site" name="to_site" value="{{ old('to_site') }}" placeholder="Hova">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="employee" class="col-lg-2 control-label">Dolgozó</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputEmployee" name="employee" value="{{ old('employee') }}" placeholder="Dolgozó">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="shipment" class="col-lg-2 control-label">Szállítmány</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputShipment" name="shipment" value="{{ old('shipment') }}" placeholder="Szállítmány">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="vehicle" class="col-lg-2 control-label">Jármű</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputVehicle" name="vehicle" value="{{ old('vehicle') }}" placeholder="Jármű">
+        </div>
+        </div>
+    {% elif typeName=="shipment" %}
+        <legend>Új szállítmány</legend>
+        <div class="form-group">
+        <label for="summary" class="col-lg-2 control-label">Leírás</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputSummary" name="summary" value="{{ old('summary') }}" placeholder="Leírás">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="type" class="col-lg-2 control-label">Típus</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputType" name="type" value="{{ old('type') }}" placeholder="Típus">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="weight" class="col-lg-2 control-label">Súly</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputWeight" name="weight" value="{{ old('weight') }}" placeholder="Súly">
+        </div>
+        </div>
+    {% endif %}
+
+    <input type="hidden" id="inputObjectType" name="objectType" value="{{typeName}}">
+
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary">Felvétel!</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
+{% endblock %}

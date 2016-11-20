@@ -26,8 +26,8 @@ Route.get('/user/:id', function * (request, response) {
 })
 */
 Route.get('/list/:name', 'SzNyController.list')
-Route.get('/new/:name', 'XYZController.showNewForm')
-Route.post('/new/:name', 'XYZController.saveNew')
+Route.get('/new/:name', 'SzNyController.showNewForm')
+Route.post('/new/:name', 'SzNyController.saveNew')
 
 Route.get('/login', 'AuthController.showLoginForm')
 Route.get('/logout', 'AuthController.logout')

@@ -2,7 +2,8 @@
 
 {% block content %}
 {% if type == "employees" %}
-    <h1>Lista: dolgozók</h1>
+    <a class="btn btn-default" href="../../new/employee">Új dolgozó</a>
+    <h1>Dolgozók listája</h1>
     <table style="width:100%">
     <tr>
         <th>Id</th>
@@ -26,7 +27,8 @@
     {% endfor %}
     </table>
 {% elif type == "vehicles" %}
-    <h1>Lista: járművek</h1>
+    <a class="btn btn-default" href="../../new/vehicle">Új jármű</a>
+    <h1>Járművek listája</h1>
     <table style="width:100%">
     <tr>
         <th>Id</th>
@@ -50,7 +52,8 @@
     {% endfor %}
     </table>
 {% elif type == "sites" %}
-    <h1>Lista: telephelyek</h1>
+    {# <a class="btn btn-default" href="../../new/site">Új telephely</a> #}
+    <h1>Telephelyek listája</h1>
     <table style="width:100%">
     <tr>
         <th>Id</th>
@@ -72,7 +75,8 @@
     {% endfor %}
     </table>
 {% elif type == "trips" %}
-    <h1>Lista: túrák</h1>
+    <a class="btn btn-default" href="../../new/trip">Új túra</a>
+    <h1>Túrák listája</h1>
     <table style="width:100%">
     <tr>
         <th>Id</th>
@@ -98,7 +102,8 @@
     {% endfor %}
     </table>
 {% elif type == "shipments" %}
-    <h1>Lista: szállítmányok</h1>
+    <a class="btn btn-default" href="../../new/shipment">Új szállítmány</a>
+    <h1>Szállítmányok listája</h1>
     <table style="width:100%">
     <tr>
         <th>Id</th>

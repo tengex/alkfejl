@@ -5,6 +5,66 @@ const Database = use('Database')
 //const Employee = use('App/Model/Employee')
 
 class SzNyController {
+    * saveNew(req, res) {
+        var post = req.post();
+        console.log(post);
+        for (var line in post) {
+            if (!post[line]) {
+                console.log("Hianyzo adat");
+                yield req.with({ errors: [{ message: "Hiányzó érték!" }] }).flash();
+                res.redirect('back')
+                return;
+            }
+        }
+        try {
+            if (post.objectType == "employee") {
+                const id = yield Database
+                    .table('employees')
+                    .insert({ username: post.username, fullname: post.fullname, gender: post.gender, email: post.email, telephone: post.telephone, password: post.password });
+            }
+            else if (post.objectType == "vehicle") {
+                const id = yield Database
+                    .table('vehicles')
+                    .insert({ license_plate: post.license_plate, manufacturer: post.manufacturer, type: post.type, category: post.category});
+            }
+            else if (post.objectType == "trip") {
+                const id = yield Database
+                    .table('trips')
+                    .insert({ from_site: post.from_site, to_site: post.to_site, employee: post.employee, shipment: post.shipment, vehicle: post.vehicle});
+            }
+            else if (post.objectType == "shipment") {
+                const id = yield Database
+                    .table('shipments')
+                    .insert({ summary: post.summary, type: post.type, weight: post.weight});
+            }
+            
+        }
+        catch (e) {
+            yield req.with({ errors: [{ message: "Helytelen érték (hibaüzenet: " + e.message + ")!" }] }).flash();
+            res.redirect('back');
+        }
+        if (post.objectType == "employee") {
+            res.redirect('/list/employees');
+        }
+        else if (post.objectType == "vehicle") {
+            res.redirect('/list/vehicles');
+        }
+        else if (post.objectType == "trip") {
+            res.redirect('/list/trips');
+        }
+        else if (post.objectType == "shipment") {
+            res.redirect('/list/shipments');
+        }
+    }
+    * showNewForm(req, res) {
+        const typesArray = ["employee", "vehicle", /*"site",*/ "trip", "shipment"];
+        if (-1 != typesArray.indexOf(req.param('name'))) {
+            const typeName = req.param('name');
+            yield res.sendView('new', {
+                typeName
+            });
+        }
+    }
     * list(req, res) {
         if (req.param('name') == "employees") {
             /*yield Database
