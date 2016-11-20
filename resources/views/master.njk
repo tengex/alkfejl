@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Adonis próba</title>
+    <title>Szállítmányozás nyilvántartás</title>
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet">
@@ -27,14 +27,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Brand</a>
+          <a class="navbar-brand" href="#">SzNy</a>
         </div>
     
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
           <ul class="nav navbar-nav">
-            <li><a href="/">Lista</a></li>
-            <li><a href="/new">Új mozi</a></li>
-            <li><a href="/protected">Védett</a></li>
+            <li><a href="/">Főoldal</a></li>
+            <li><a href="/list/employees/">Dolgozók</a></li>
+            <li><a href="/list/vehicle">Járművek</a></li>
+            <li><a href="/list/site">Telephelyek</a></li>
           </ul>
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
@@ -43,11 +44,24 @@
             <button type="submit" class="btn btn-default">Submit</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
+            <li><a href="/about">Névjegy</a></li>
             {% if currentUser %}
-              <li><a href="/logout">Logout</a></li>
+              <li><a href="/logout">Kijelentkezés</a></li>
             {% else %}
-              <li><a href="/login">Login</a></li>
+              <li><a href="/login">Bejelentkezés</a></li>
             {% endif %}
+          </ul>
+          {% if currentUser %}
+            <p class="navbar-text navbar-right">Hello, {{ currentUser.username }}!</p>
+          {% endif %}
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+          <ul class="nav navbar-nav">
+            <li><a href="/edit_employee_data">|Dolgozói adataim|</a></li>
+            <li><a href="/list_employee_vehicles">|Vezetett járműveim|</a></li>
+            <li><a href="/list_free_vehicles">|Szabad járművek|</a></li>
+            <li><a href="/list_employee_shipments">|Szállítmányok|</a></li>
+            <li><a href="/list_employee_trips">|Saját túráim|</a></li>
           </ul>
           {% if currentUser %}
             <p class="navbar-text navbar-right">Hello, {{ currentUser.username }}!</p>

@@ -18,10 +18,25 @@
 const Route = use('Route')
 
 // Route.on('/').render('index')
-Route.get('/', 'MovieController.index')
-Route.get('/new', 'MovieController.showNewForm')
-Route.post('/new', 'MovieController.saveNew')
+//http://www.adonisjs.com/docs/3.1/routing
+/*
+Route.get('/user/:id', function * (request, response) {
+  const id = request.param('id')
+  response.send(`Profile for user with id ${id}`)
+})
+*/
+Route.get('/list/:name', 'XYZController.list')
+Route.get('/new/:name', 'XYZController.showNewForm')
+Route.post('/new/:name', 'XYZController.saveNew')
+
 Route.get('/login', 'AuthController.showLoginForm')
 Route.get('/logout', 'AuthController.logout')
 Route.post('/login', 'AuthController.handleLogin')
+
+Route.on('/about').render('about')
+
+Route.get('/', 'MovieController.index')
+/*Route.get('/new', 'MovieController.showNewForm')
+Route.post('/new', 'MovieController.saveNew')*/
+
 Route.get('/protected', 'ProtectedController.index').middleware('auth')

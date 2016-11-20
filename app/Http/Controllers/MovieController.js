@@ -8,17 +8,17 @@ class MovieController {
 
   * index (request, response) {
     
-    // const movies = yield Database.from('movies').select('*');
+     const movies = yield Database.from('movies').select('*');
     // const movies = yield Movie.all();
-    const movies = yield Movie.with('actors').fetch();
+    //const movies = yield Movie.with('actors').fetch();
     
     // console.log(movies) //lodash gyűjtemény
     
     // yield response.send(movies);
     
     yield response.sendView('index', {
-      // movies
-      movies: movies.toJSON()
+       movies
+      //movies: movies.toJSON()
     })
   }
 
