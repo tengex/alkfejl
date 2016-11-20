@@ -25,7 +25,7 @@ Route.get('/user/:id', function * (request, response) {
   response.send(`Profile for user with id ${id}`)
 })
 */
-Route.get('/list/:name', 'XYZController.list')
+Route.get('/list/:name', 'SzNyController.list')
 Route.get('/new/:name', 'XYZController.showNewForm')
 Route.post('/new/:name', 'XYZController.saveNew')
 

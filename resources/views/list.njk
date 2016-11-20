@@ -1,0 +1,12 @@
+{% extends 'master' %}
+
+{% block content %}
+<h1>Lista</h1>
+{% for employee in employees %}
+<div class="list-group">
+<p class="list-group-item-text">
+{{ employee.username }} {{ employee.fullname }} {{ employee.gender }} {{ employee.email }} {{ employee.telephone }} {{ employee.is_active}}
+</p>
+</div>
+{% endfor %}
+{% endblock %}
