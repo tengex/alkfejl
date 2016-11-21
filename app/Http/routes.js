@@ -29,9 +29,11 @@ Route.get('/list/:name', 'SzNyController.list')
 Route.get('/new/:name', 'SzNyController.showNewForm')
 Route.post('/new/:name', 'SzNyController.saveNew')
 
-Route.get('/login', 'AuthController.showLoginForm')
+Route.get('/dev/', 'SzNyController.dev')
+
+Route.get('/login', 'AuthController.login')
+Route.post('/login', 'AuthController.loginSubmit')
 Route.get('/logout', 'AuthController.logout')
-Route.post('/login', 'AuthController.handleLogin')
 
 Route.on('/about').render('about')
 

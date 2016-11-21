@@ -1,34 +1,35 @@
-{% extends 'master' %}
+{% extends "master.njk" %}
 
 {% block content %}
-  <h1>Login</h1>
 
-  {% if old('errors') %}
-    <div class="alert alert-danger">
-      <ul>
-        {% for error in old('errors') %}
-          <li> {{ error.message }} </li>
-        {% endfor %}
-      </ul>
-    </div>
-  {% endif %}
-
-  {{ form.open({action: 'AuthController.handleLogin'}) }}
-
+  <ul>
+    {% for error in old('errors') %}
+      <li>{{ error.message }}</li>
+    {% endfor %}
+  </ul>
+<form class="form-horizontal" method="POST">
     {{ csrfField }}
-
-    <fieldset class="form-group">
-      {{ form.label('Email') }}
-      {{ form.text('email', old('email'), { class: 'form-control' }) }}
-    </fieldset>
-
-    <fieldset class="form-group">
-      {{ form.label('Password') }}
-      {{ form.text('password', old('password'), { class: 'form-control' }) }}
-    </fieldset>
-
-    {{ form.submit('Login', 'login', { class: 'btn btn-primary btn-block' }) }}
-
-  {{ form.close() }}
-
+  <fieldset>
+    <legend>Bejelentkezés</legend>
+    <div class="form-group">
+      <label for="username" class="col-lg-2 control-label">Felhasználónév</label>
+      <div class="col-lg-10">
+        <input type="text" class="form-control" id="inputUsername" name="username" value="{{ old('username') }}" placeholder="Felhasználónév">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputPassword" class="col-lg-2 control-label">Jelszó</label>
+      <div class="col-lg-10">
+        <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Jelszó">
+    
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="submit" class="btn btn-primary">Belépés!</button>
+      </div>
+    </div>
+  </fieldset>
+</form>
 {% endblock %}

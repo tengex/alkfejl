@@ -8,7 +8,36 @@ class AuthController {
         yield response.sendView('loginForm')
     }
 
-    * handleLogin(request, response) {
+    * login(req, res) {
+        yield res.sendView('loginForm');
+    }
+
+    * loginSubmit(req, res) {
+        try {
+            var post = req.post();
+            yield req.auth.attempt(post.username, post.password);
+            res.redirect('/');
+        } catch (e) {
+            yield req
+                .withOut('password')
+                .andWith({
+                    errors: [{
+                        message: 'Bad credentials'
+                    }]
+                })
+                .flash()
+            res.redirect('back')
+            console.log(e);
+            return
+        }
+    }
+
+    * logout(req, res) {
+        yield req.auth.logout();
+        res.redirect('/');
+    }
+
+    /* handleLogin(request, response) {
         const email = request.input('email')
         const password = request.input('password')
         // Database.on('sql', console.log)
@@ -30,7 +59,7 @@ class AuthController {
     * logout (request, response) {
         yield request.auth.logout();
         response.redirect('/');
-    }
+    }*/
 
 }
 
