@@ -26,8 +26,13 @@ Route.get('/user/:id', function * (request, response) {
 })
 */
 Route.get('/list/:name', 'SzNyController.list')
-Route.get('/new/:name', 'SzNyController.showNewForm')
-Route.post('/new/:name', 'SzNyController.saveNew')
+Route.get('/new/:name', 'SzNyController.createNew')
+Route.post('/new/:name', 'SzNyController.createNewSubmit')
+Route.get('/edit/:name/:id', 'SzNyController.edit')
+Route.post('/edit/:name/:id', 'SzNyController.editSubmit')
+
+Route.get('/inactivate/:name/:id', 'SzNyController.inactivate')
+Route.get('/activate/:name/:id', 'SzNyController.activate')
 
 Route.get('/dev/', 'SzNyController.dev')
 

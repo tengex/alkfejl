@@ -1,32 +1,32 @@
 {% extends 'master' %}
 
 {% block content %}
-{% if type == "employees" %}
-    <a class="btn btn-default" href="../../new/employee">Új dolgozó</a>
-    <h1>Dolgozók listája</h1>
-    <table style="width:100%">
+{% if entityType == "employees" %}
+    <h1 id="bottom"><small>Dolgozók listája{% if currentUser.username=="Admin" %} <a class="btn btn-primary" href="/new/employee">Új dolgozó</a>{% endif %}</small></h1>
+    <table class="table-striped table-bordered table-hover" style="width:100%">
     <tr>
-        <th>Id</th>
+        <th>ID</th>
         <th>Felhasználói név</th>
         <th>Teljes név</th>
-        <th>Nem</th>
         <th>Email</th>
         <th>Telefon</th>
         <th>Aktív</th>
+        {% if currentUser.username=="Admin" %} <th>Műveletek</th> {% endif %}
     </tr>
-    {% for employee in employees %}
+    {% for employee in entities %}
     <tr>
         <td>{{ employee.id }}</td>
         <td>{{ employee.username }}</td>
         <td>{{ employee.fullname }}</td>
-        <td>{% if employee.gender == 1 %} Férfi {% elif employee.gender == 2 %} Nő {% endif %}</td>
         <td>{{ employee.email }}</td>
         <td>{{ employee.telephone }}</td>
         <td>{% if employee.is_active %} Aktív {% else %} Inaktív {% endif %}</td>
+        {% if currentUser.username=="Admin" %}<td style="width:250px" align="center"><a class="btn btn-warning" href="/edit/employee/{{ employee.id }}">Módosítás</a> {% if employee.username!="Admin" %}{% if employee.is_active %} <a class="btn btn-danger" href="/inactivate/employee/{{ employee.id }}">Inaktiválás</a> {% else %} <a class="btn btn-success" href="/activate/employee/{{ employee.id }}">Aktiválás</a>{% endif %}{% endif %}</td>{% endif %}
     </tr>
     {% endfor %}
     </table>
-{% elif type == "vehicles" %}
+    <a href="#bottom">Oldal tetejére</a>
+{% elif entityType == "vehicles" %}
     <a class="btn btn-default" href="../../new/vehicle">Új jármű</a>
     <h1>Járművek listája</h1>
     <table style="width:100%">
@@ -39,7 +39,7 @@
         <th>Elérhető</th>
         <th>Aktív</th>
     </tr>
-    {% for vehicle in vehicles %}
+    {% for vehicle in entities %}
     <tr>
         <td>{{ vehicle.id }}</td>
         <td>{{ vehicle.license_plate }}</td>
@@ -51,7 +51,7 @@
     </tr>
     {% endfor %}
     </table>
-{% elif type == "sites" %}
+{% elif entityType == "sites" %}
     {# <a class="btn btn-default" href="../../new/site">Új telephely</a> #}
     <h1>Telephelyek listája</h1>
     <table style="width:100%">
@@ -63,7 +63,7 @@
         <th>Cím</th>
         <th>Irányítószám</th>
     </tr>
-    {% for site in sites %}
+    {% for site in entities %}
     <tr>
         <td>{{ site.id }}</td>
         <td>{{ site.name }}</td>
@@ -74,7 +74,7 @@
     </tr>
     {% endfor %}
     </table>
-{% elif type == "trips" %}
+{% elif entityType == "trips" %}
     <a class="btn btn-default" href="../../new/trip">Új túra</a>
     <h1>Túrák listája</h1>
     <table style="width:100%">
@@ -88,7 +88,7 @@
         <th>Kezdés</th>
         <th>Befejezés</th>
     </tr>
-    {% for trip in trips %}
+    {% for trip in entities %}
     <tr>
         <td>{{ trip.id }}</td>
         <td>{{ trip.from_site }}</td>
@@ -101,7 +101,7 @@
     </tr>
     {% endfor %}
     </table>
-{% elif type == "shipments" %}
+{% elif entityType == "shipments" %}
     <a class="btn btn-default" href="../../new/shipment">Új szállítmány</a>
     <h1>Szállítmányok listája</h1>
     <table style="width:100%">
@@ -111,7 +111,7 @@
         <th>Típus</th>
         <th>Súly</th>
     </tr>
-    {% for shipment in shipments %}
+    {% for shipment in entities %}
     <tr>
         <td>{{ shipment.id }}</td>
         <td>{{ shipment.summary }}</td>

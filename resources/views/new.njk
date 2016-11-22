@@ -5,10 +5,11 @@
       <li>{{ error.message }}</li>
     {% endfor %}
   </ul>
+{% if currentUser.username == "Admin" %}
 <form class="form-horizontal" method="POST">
     {{ csrfField }}
   <fieldset>
-    {% if typeName=="employee" %}
+    {% if entityType=="employee" %}
         <legend>Új dolgozó</legend>
         <div class="form-group">
         <label for="username" class="col-lg-2 control-label">Felhasználónév</label>
@@ -20,13 +21,6 @@
         <label for="fullname" class="col-lg-2 control-label">Teljes név</label>
         <div class="col-lg-10">
             <input type="text" class="form-control" id="inputFullname" name="fullname" value="{{ old('fullname') }}" placeholder="Teljes név">
-        </div>
-        </div>
-        <div class="form-group">
-        <label for="gender" class="col-lg-2 control-label">Nem</label>
-        <div class="col-lg-10">
-            <input type="radio" id="inputGender" name="gender" value=1 checked="checked"> Férfi
-            <input type="radio" id="inputGender" name="gender" value=2> Nő
         </div>
         </div>
         <div class="form-group">
@@ -53,7 +47,7 @@
             <input type="password" class="form-control" name="password2" id="inputPassword2" placeholder="Jelszó megerősítése">
         </div>
         </div>
-    {% elif typeName=="vehicle" %}
+    {% elif entityType=="vehicle" %}
         <legend>Új jármű</legend>
         <div class="form-group">
         <label for="license_plate" class="col-lg-2 control-label">Rendszám</label>
@@ -79,7 +73,7 @@
             <input type="text" class="form-control" id="inputCategory" name="category" value="{{ old('category') }}" placeholder="Kategória">
         </div>
         </div>
-    {# {% elif typeName=="site" %}
+    {# {% elif entityType=="site" %}
         <legend>Új telephely</legend>
         <div class="form-group">
         <label for="username" class="col-lg-2 control-label">Felhasználónév</label>
@@ -118,7 +112,7 @@
             <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Jelszó">
         </div>
         </div> #}
-    {% elif typeName=="trip" %}
+    {% elif entityType=="trip" %}
         <legend>Új túra</legend>
         <div class="form-group">
         <label for="from_site" class="col-lg-2 control-label">Honnan</label>
@@ -150,7 +144,7 @@
             <input type="text" class="form-control" id="inputVehicle" name="vehicle" value="{{ old('vehicle') }}" placeholder="Jármű">
         </div>
         </div>
-    {% elif typeName=="shipment" %}
+    {% elif entityType=="shipment" %}
         <legend>Új szállítmány</legend>
         <div class="form-group">
         <label for="summary" class="col-lg-2 control-label">Leírás</label>
@@ -181,4 +175,9 @@
     </div>
   </fieldset>
 </form>
+{% else %}
+    <div class="alert alert-danger">
+        <strong>Hiba!</strong> Nincs jogosultság az oldal megjelenítéséhez!
+    </div>
+{% endif %}
 {% endblock %}

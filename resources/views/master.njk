@@ -54,21 +54,24 @@
             {% endif %}
           </ul>
           {% if currentUser %}
-            <p class="navbar-text navbar-right">Hello, {{ currentUser.username }}!</p>
+            <p class="navbar-text navbar-right">Hello, {{ currentUser.username }} ({{ currentUser.id }})!</p>
           {% endif %}
         </div>
+        {% if currentUser %}{% if currentUser.is_active %}
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
           <ul class="nav navbar-nav">
-            <li><a href="/edit_employee_data">|Dolgozói adataim|</a></li>
-            <li><a href="/list_employee_vehicles">|Vezetett járműveim|</a></li>
-            <li><a href="/list_free_vehicles">|Szabad járművek|</a></li>
-            <li><a href="/list_employee_shipments">|Szállítmányok|</a></li>
-            <li><a href="/list_employee_trips">|Saját túráim|</a></li>
+            <li><a href="/edit/employee/{{ currentUser.id }}">Adataim módosítása</a></li>
+            <li><a href="/list_employee_vehicles">Vezetett járműveim</a></li>
+            <li><a href="/list_free_vehicles">Szabad járművek</a></li>
+            <li><a href="/list_employee_shipments">Szállítmányok</a></li>
+            <li><a href="/list_employee_trips">Saját túráim</a></li>
           </ul>
-          {% if currentUser %}
-            <p class="navbar-text navbar-right">Hello, {{ currentUser.username }}!</p>
-          {% endif %}
         </div>
+        {% else %}
+          <div class="alert alert-danger">
+            <strong>Hiba!</strong> A dolgozó inaktív állapotban van!
+          </div>
+        {% endif %}{% endif %}
       </div>
     </nav>
     

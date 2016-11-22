@@ -5,9 +5,18 @@ const Lucid = use('Lucid')
 class Employee extends Lucid {
     static get rules() {
         return {
-            username: 'required|unique:user|min:2|max:20',
+            username: 'required|unique:employees|min:2|max:20',
             fullname: 'required',
-            email: 'required|email|unique:users',
+            email: 'required|email|unique:employees',
+            password: 'required',
+            password2: 'required|same:password',
+        }
+    }
+
+    static get rulesEdit() {
+        return {
+            fullname: 'required',
+            email: 'required|email',
             password: 'required',
             password2: 'required|same:password',
         }
