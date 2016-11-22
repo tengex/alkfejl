@@ -3,20 +3,19 @@
 {% block content %}
   <h1>Főoldal</h1>
 
-  {% for movie in movies %}
-    <div class="list-group">
-      <a href="#" class="list-group-item">
-        <h4 class="list-group-item-heading">{{ movie.title }} ({{ movie.releaseDate }})</h4>
-        <p class="list-group-item-text">
-          <ul>
-            {% for actor in movie.actors %}
-            <li>{{ actor.firstname }} {{ actor.lastname }} ({{ actor.dateOfBirth }})</li>
-            {% endfor %}
-          </ul>
-        </p>
-      </a>
+{% if not currentUser %}
+  <div class="alert alert-success">
+    <strong>Üdvözöljük!</strong> Bejelentkezhet az oldalra a jobb felső sarokban. 
+  </div>
+{% else %}
+  <div class="alert alert-success">
+    <strong>Üdvözöljük!</strong> Sikeresen bejelentkezett! 
+  </div>
+  {% if not currentUser.is_active %}
+    <div class="alert alert-warning">
+      <strong>Figyelem!</strong> A felhasználó inaktív állapotban van! 
     </div>
-  {% endfor %}
-
+  {% endif %}
+{% endif %}
 
 {% endblock %}

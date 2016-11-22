@@ -5,7 +5,6 @@
       <li>{{ error.message }}</li>
     {% endfor %}
   </ul>
-{% if currentUser.username == "Admin" %}
 <form class="form-horizontal" method="POST">
     {{ csrfField }}
   <fieldset>
@@ -166,7 +165,7 @@
         </div>
     {% endif %}
 
-    <input type="hidden" id="inputObjectType" name="objectType" value="{{typeName}}">
+    <input type="hidden" id="inputObjectType" name="objectType" value="{{entityType}}">
 
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
@@ -175,9 +174,4 @@
     </div>
   </fieldset>
 </form>
-{% else %}
-    <div class="alert alert-danger">
-        <strong>Hiba!</strong> Nincs jogosultság az oldal megjelenítéséhez!
-    </div>
-{% endif %}
 {% endblock %}

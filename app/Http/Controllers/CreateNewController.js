@@ -2,126 +2,37 @@
 
 const Validator = use('Validator')
 const Hash = use('Hash')
-const Database = use('Database')
 const Employee = use('App/Model/Employee')
 const Vehicle = use('App/Model/Vehicle')
 const Trip = use('App/Model/Trip')
 const Shipment = use('App/Model/Shipment')
 
-class SzNyController {
-    * inactivate(req, res) {
+class CreateNewController {
+    * createNew(req, res) {
         try {
+            const entityTypesArray = ["employee", "vehicle", /*"site",*/ "trip", "shipment"];
             if (req.currentUser.username == "Admin") {
-                if (req.param('name') == "employee") {
-                    var entity = yield Employee.findBy('id', req.param('id'));
-                    if (entity.username == "Admin") {
-                        yield res.sendView('permissionError');
-                    } else {
-                        entity.is_active = false;
-                        yield entity.save();
-                    }
+
+                if (-1 != entityTypesArray.indexOf(req.param('name'))) {
+                    const entityType = req.param('name');
+                    yield res.sendView('new', {
+                        entityType
+                    });
                 }
             }
             else {
-                yield res.sendView('permissionError');
-            }
-            res.redirect('back');
-        }
-        catch (e) {
-            yield res.sendView('unexpectedError');
-        }
-    }
-
-    * activate(req, res) {
-        try {
-            if (req.currentUser.username == "Admin") {
-                if (req.param('name') == "employee") {
-                    var entity = yield Employee.findBy('id', req.param('id'));
-                    entity.is_active = true;
-                    yield entity.save();
-                }
-            }
-            else {
-                yield res.sendView('permissionError');
-            }
-            res.redirect('back');
-        }
-        catch (e) {
-            yield res.sendView('unexpectedError');
-        }
-    }
-
-    * edit(req, res) {
-        try {
-            const entityType = req.param('name');
-
-            if (req.param('name') == "employee") {
-                if (req.currentUser.username == "Admin" || req.currentUser.id == req.param('id')) {
-                    var entity = yield Employee.findBy('id', req.param('id'));
-                }
-                else {
-                    yield res.sendView('permissionError');
-                }
-            }
-
-            if (entity) {
-                yield res.sendView('edit', {
-                    entity: entity.toJSON(),
-                    entityType
-                });
+                yield res.sendView('errors.permissionError');
             }
         }
         catch (e) {
-            yield res.sendView('unexpectedError');
+            yield res.sendView('errors.unexpectedError');
         }
-    }
-
-
-    * editSubmit(req, res) {
-        var post = req.post();
-        if (req.param('name') == "employee") {
-            var entity = yield Employee.findBy('id', req.param('id'));
-            entity.username = post.username;
-            entity.fullname = post.fullname;
-            entity.email = post.email;
-            entity.telephone = post.telephone;
-            entity.password = post.password;
-            entity.password2 = post.password2;
-
-            const validation = yield Validator.validateAll(entity, Employee.rulesEdit)
-            if (validation.fails()) {
-                yield req
-                    .withOut('password', 'password2')
-                    .andWith({ errors: validation.messages() })
-                    .flash()
-
-                res.redirect('back')
-                return
-            }
-
-            entity.password2 = undefined;
-            entity.password = yield Hash.make(entity.password);
-
-            yield entity.save();
-        }
-
-        res.redirect('/');
-    }
-
-    * dev(req, res) {
-        /*const select = yield Database.select('*').from('employees');
-        yield res.sendView('dev', {
-            select
-        });*/
-        console.log("********************DEV********************")
-        //console.log(select);
-        console.log(req.currentUser.username);
     }
 
     * createNewSubmit(req, res) {
         var post = req.post();
-
         try {
+            console.log((post.objectType == "vehicle") + "------------------------------------------------------------------------------");
             if (post.objectType == "employee") {
                 var employeeData = {
                     username: post.username,
@@ -219,7 +130,6 @@ class SzNyController {
                 var shipment = yield Shipment.create(shipmentData);
                 yield shipment.save();
             }
-
         }
 
         catch (e) {
@@ -242,46 +152,6 @@ class SzNyController {
                 break;
         }
     }
-
-    * createNew(req, res) {
-        try {
-            const entityTypesArray = ["employee", "vehicle", /*"site",*/ "trip", "shipment"];
-            if (req.currentUser.username == "Admin") {
-
-                if (-1 != entityTypesArray.indexOf(req.param('name'))) {
-                    const entityType = req.param('name');
-                    yield res.sendView('new', {
-                        entityType
-                    });
-                }
-            }
-            else {
-                yield res.sendView('permissionError');
-            }
-        }
-        catch (e) {
-            yield res.sendView('unexpectedError');
-        }
-    }
-
-    * list(req, res) {
-        try {
-            const entityTypesArray = ["employees", "vehicles", "sites", "trips", "shipments"];
-            const entityType = req.param('name');
-
-            if (-1 != entityTypesArray.indexOf(req.param('name'))) {
-                const entities = yield Database.select('*').from(req.param('name'));
-                yield res.sendView('list', {
-                    entities,
-                    entityType
-                });
-            }
-        }
-        catch (e) {
-            yield res.sendView('unexpectedError');
-        }
-    }
-
 }
 
-module.exports = SzNyController
+module.exports = CreateNewController
