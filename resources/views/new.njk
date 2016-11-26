@@ -111,7 +111,39 @@
             <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Jelszó">
         </div>
         </div> #}
-    {% elif entityType=="trip" %}
+    {% elif entityType=="trip" and entityFilter=="own"%}
+        <legend>Új saját túra</legend>
+        <div class="form-group">
+        <label for="from_site" class="col-lg-2 control-label">Honnan</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputFrom_site" name="from_site" value="{{ old('from_site') }}" placeholder="Honnan">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="to_site" class="col-lg-2 control-label">Hova</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputTo_site" name="to_site" value="{{ old('to_site') }}" placeholder="Hova">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="employee" class="col-lg-2 control-label">Dolgozó</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputEmployee" name="employee" value="{{ currentUser.username }}" placeholder="Dolgozó" readonly>
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="shipment" class="col-lg-2 control-label">Szállítmány</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputShipment" name="shipment" value="{{ old('shipment') }}" placeholder="Szállítmány">
+        </div>
+        </div>
+        <div class="form-group">
+        <label for="vehicle" class="col-lg-2 control-label">Jármű</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" id="inputVehicle" name="vehicle" value="{{ old('vehicle') }}" placeholder="Jármű">
+        </div>
+        </div>
+        {% elif entityType=="trip" and entityFilter==undefined%}
         <legend>Új túra</legend>
         <div class="form-group">
         <label for="from_site" class="col-lg-2 control-label">Honnan</label>

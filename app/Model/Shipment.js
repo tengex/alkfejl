@@ -8,6 +8,12 @@ class Shipment extends Lucid {
             summary: 'required'
         }
     }
+
+    static get rulesEdit() {
+        return {
+            summary: 'required'
+        }
+    }
 }
 
 module.exports = Shipment

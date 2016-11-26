@@ -10,19 +10,38 @@ const Shipment = use('App/Model/Shipment')
 class CreateNewController {
     * createNew(req, res) {
         try {
-            const entityTypesArray = ["employee", "vehicle", /*"site",*/ "trip", "shipment"];
-            if (req.currentUser.username == "Admin") {
+            const entityType = req.param('name');
+            const entityFilter = req.param('filter');
+            var success = false;
 
-                if (-1 != entityTypesArray.indexOf(req.param('name'))) {
-                    const entityType = req.param('name');
-                    yield res.sendView('new', {
-                        entityType
-                    });
-                }
+            if (
+                (
+                    (entityType == "employee" && entityFilter == undefined ||
+                        entityType == "trip" && entityFilter == undefined ||
+                        entityType == "vehicle" && entityFilter == undefined)
+                    &&
+                    (req.currentUser.username == "Admin")
+                )
+                ||
+                (
+                    (entityType == "shipment" && entityFilter == undefined ||
+                        entityType == "trip" && entityFilter == "own")
+                    &&
+                    (req.currentUser.username == "Admin" || req.currentUser.is_active)
+                )
+            ) {
+                yield res.sendView('new', {
+                    entityType,
+                    entityFilter
+                });
+                success = true;
             }
-            else {
+
+            if (!success) {
                 yield res.sendView('errors.permissionError');
             }
+
+            yield res.sendView('errors.unexpectedError');
         }
         catch (e) {
             yield res.sendView('errors.unexpectedError');
@@ -32,7 +51,6 @@ class CreateNewController {
     * createNewSubmit(req, res) {
         var post = req.post();
         try {
-            console.log((post.objectType == "vehicle") + "------------------------------------------------------------------------------");
             if (post.objectType == "employee") {
                 var employeeData = {
                     username: post.username,
@@ -61,6 +79,7 @@ class CreateNewController {
                 var employee = yield Employee.create(employeeData);
                 yield employee.save();
             }
+
             else if (post.objectType == "vehicle") {
                 var vehicleData = {
                     license_plate: post.license_plate,
@@ -84,13 +103,16 @@ class CreateNewController {
                 var vehicle = yield Vehicle.create(vehicleData);
                 yield vehicle.save();
             }
+
             else if (post.objectType == "trip") {
+                var d = new Date();
                 var tripData = {
                     from_site: post.from_site,
                     to_site: post.to_site,
                     employee: post.employee,
                     shipment: post.shipment,
-                    vehicle: post.vehicle
+                    vehicle: post.vehicle,
+                    start_date: Math.floor(d.getTime() / 1000)
                 };
 
                 const validation = yield Validator.validateAll(tripData, Trip.rules);
@@ -108,6 +130,7 @@ class CreateNewController {
                 var trip = yield Trip.create(tripData);
                 yield trip.save();
             }
+
             else if (post.objectType == "shipment") {
                 var shipmentData = {
                     summary: post.summary,
@@ -145,7 +168,11 @@ class CreateNewController {
                 res.redirect('/list/vehicles');
                 break;
             case "trip":
-                res.redirect('/list/trips');
+                if (req.param('filter') == undefined) {
+                    res.redirect('/list/trips');
+                } else if (req.param('filter') == "own") {
+                    res.redirect('/list/trips/own');
+                }
                 break;
             case "shipment":
                 res.redirect('/list/shipments');

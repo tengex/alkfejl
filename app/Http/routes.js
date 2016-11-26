@@ -26,14 +26,14 @@ Route.get('/user/:id', function * (request, response) {
 })
 */
 Route.get('/list/:name/:filter?', 'ListController.list')
-Route.get('/new/:name', 'CreateNewController.createNew')
-Route.post('/new/:name', 'CreateNewController.createNewSubmit')
+Route.get('/new/:name/:filter?', 'CreateNewController.createNew')
+Route.post('/new/:name/:filter?', 'CreateNewController.createNewSubmit')
 Route.get('/edit/:name/:id', 'EditController.edit')
 Route.post('/edit/:name/:id', 'EditController.editSubmit')
 Route.get('/inactivate/:name/:id', 'ActivateController.inactivate')
 Route.get('/activate/:name/:id', 'ActivateController.activate')
+Route.get('/close/trip/:id', 'CloseTripController.closeTrip')
 
-Route.get('/dev/', 'SzNyController.dev')
 
 Route.get('/login', 'AuthController.login')
 Route.post('/login', 'AuthController.loginSubmit')

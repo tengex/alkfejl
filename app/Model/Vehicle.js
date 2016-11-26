@@ -10,9 +10,16 @@ class Vehicle extends Lucid {
         }
     }
 
-    trips() {
-        return this.hasMany('App/Model/Trip', "license_plate", "vehicle");
+    static get rulesEdit() {
+        return {
+            license_plate: 'required',
+            manufacturer: 'required'
+        }
     }
+
+    /*trips() {
+        return this.hasMany('App/Model/Trip', 'license_plate', 'vehicle');
+    }*/
 
 }
 
