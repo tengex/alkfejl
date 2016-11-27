@@ -6,6 +6,8 @@ const Employee = use('App/Model/Employee')
 const Vehicle = use('App/Model/Vehicle')
 const Trip = use('App/Model/Trip')
 const Shipment = use('App/Model/Shipment')
+const Site = use('App/Model/Site')
+const Database = use('Database')
 
 class CreateNewController {
     * createNew(req, res) {
@@ -115,9 +117,116 @@ class CreateNewController {
                     start_date: Math.floor(d.getTime() / 1000)
                 };
 
+                var correctData = true;
+                var errorMessages = [];
+
+                var shipment = yield Shipment.findBy('id', tripData.shipment);
+                if (shipment == null) {
+                    correctData = false;
+                    errorMessages[errorMessages.length] = {
+                        field: 'shipment',
+                        validation: 'exists',
+                        message: 'exists validation failed on shipment'
+                    };
+                }
+
+                var site1 = yield Site.findBy('name', tripData.from_site);
+                if (site1 == null) {
+                    correctData = false;
+                    errorMessages[errorMessages.length] = {
+                        field: 'site1',
+                        validation: 'exists',
+                        message: 'exists validation failed on site1'
+                    };
+                }
+
+                var site2 = yield Site.findBy('name', tripData.to_site);
+                if (site2 == null) {
+                    correctData = false;
+                    errorMessages[errorMessages.length] = {
+                        field: 'site2',
+                        validation: 'exists',
+                        message: 'exists validation failed on site2'
+                    };
+                }
+
+                var vehicle = yield Vehicle.findBy('license_plate', tripData.vehicle);
+                if (vehicle != null) {
+                    if (!vehicle.is_active) {
+                        correctData = false;
+                        errorMessages[errorMessages.length] = {
+                            field: 'vehicle',
+                            validation: 'isActive',
+                            message: 'isActive validation failed on vehicle'
+                        };
+                    }
+                    if (!vehicle.is_available) {
+                        correctData = false;
+                        errorMessages[errorMessages.length] = {
+                            field: 'vehicle',
+                            validation: 'isAvailable',
+                            message: 'isAvailable validation failed on vehicle'
+                        };
+                    }
+                }
+                else {
+                    correctData = false;
+                    errorMessages[errorMessages.length] = {
+                        field: 'vehicle',
+                        validation: 'exists',
+                        message: 'exists validation failed on vehicle'
+                    };
+                }
+
+                var hasUnclosedTrip = false;
+                var employee = yield Employee.findBy('username', tripData.employee);
+                if (employee != null) {
+                    if (!employee.is_active) {
+                        correctData = false;
+                        errorMessages[errorMessages.length] = {
+                            field: 'employee',
+                            validation: 'isActive',
+                            message: 'isActive validation failed on employee'
+                        };
+                    }
+
+                    const trips = yield Database.select('*').from('trips').where('employee', employee.username);
+                    for (var i in trips) {
+                        if (trips[i].end_date == null) {
+                            hasUnclosedTrip = true;
+                        }
+                    }
+                    if (hasUnclosedTrip) {
+                        correctData = false;
+                        errorMessages[errorMessages.length] = {
+                            field: 'employee',
+                            validation: 'notHasUnclosedTrip',
+                            message: 'notHasUnclosedTrip validation failed on employee'
+                        };
+                    }
+                }
+                else {
+                    correctData = false;
+                    errorMessages[errorMessages.length] = {
+                        field: 'employee',
+                        validation: 'exists',
+                        message: 'exists validation failed on employee'
+                    };
+                }
+
+                if (!correctData) {
+                    yield req
+                        .without()
+                        .andWith({ errors: errorMessages })
+                        .flash();
+
+                    res.redirect('back');
+                    return;
+                }
+
                 const validation = yield Validator.validateAll(tripData, Trip.rules);
 
-                if (validation.fails()) {
+                if (validation.fails() && correctData) {
                     yield req
                         .without()
                         .andWith({ errors: validation.messages() })
@@ -128,7 +237,9 @@ class CreateNewController {
                 }
 
                 var trip = yield Trip.create(tripData);
-                yield trip.save();
+                yield trip.save(); 
+                vehicle.is_available = false;
+                yield vehicle.save();
             }
 
             else if (post.objectType == "shipment") {
