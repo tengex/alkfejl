@@ -16,7 +16,7 @@ class VehicleSeeder {
         { license_plate: "BPI-117", manufacturer: "IKARUS", type: "435", category: "Busz", is_active: true, is_available: true },
         { license_plate: "DUM-015", manufacturer: "IKARUS", type: "250", category: "Busz", is_active: true, is_available: true },
         { license_plate: "BSN-552", manufacturer: "IKARUS", type: "256", category: "Busz", is_active: true, is_available: false },
-        { license_plate: "ACH-131", manufacturer: "IKARUS", type: "266", category: "Busz", is_active: false, is_available: true },
+        { license_plate: "ACH-131", manufacturer: "IKARUS", type: "266", category: "Busz", is_active: false, is_available: false },
         { license_plate: "GEX-808", manufacturer: "IKARUS", type: "280", category: "Busz", is_active: true, is_available: false },
         { license_plate: "NBZ-088", manufacturer: "IKARUS", type: "250", category: "Busz", is_active: true, is_available: true }
       ]);

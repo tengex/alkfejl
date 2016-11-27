@@ -8,9 +8,11 @@
 
 {% block content %}
 
+<h1 id="bottom">
+
 {% if entityType == "employees" %}
-    <h1 id="bottom">Dolgozók listája
-    {% if true %} <a class="btn btn-primary" href="/new/employee">Új dolgozó</a>{% endif %}
+        Dolgozók listája
+        <a class="btn btn-primary" href="/new/employee">Új dolgozó</a>
     </h1>
     <table class="table-striped table-bordered table-hover" style="width:100%">
     <tr>
@@ -30,13 +32,20 @@
         <td>{{ employee.email }}</td>
         <td>{{ employee.telephone }}</td>
         <td>{% if employee.is_active %} Aktív {% else %} Inaktív {% endif %}</td>
-        <td style="width:250px" align="center"><a class="btn btn-warning" href="/edit/employee/{{ employee.id }}">Módosítás</a> {% if employee.username!="Admin" %}{% if employee.is_active %} <a class="btn btn-danger" href="/inactivate/employee/{{ employee.id }}">Inaktiválás</a> {% else %} <a class="btn btn-success" href="/activate/employee/{{ employee.id }}">Aktiválás</a>{% endif %}{% endif %}</td>
+        <td style="width:250px" align="center">
+            <a class="btn btn-warning" href="/edit/employee/{{ employee.id }}">Módosítás</a>
+            <a class="btn btn-danger" href="/inactivate/employee/{{ employee.id }}">Inaktiválás</a>
+            <a class="btn btn-success" href="/activate/employee/{{ employee.id }}">Aktiválás</a>
+        </td>
     </tr>
     {% endfor %}
 
-{% elif entityType == "vehicles" and entityFilter == undefined %}
-    <h1 id="bottom">Járművek listája
-    {% if true %} <a class="btn btn-primary" href="/new/vehicle">Új jármű</a>{% endif %}
+{% elif entityType == "vehicles" %}
+    {% if entityFilter == undefined %} Járművek listája
+    {% elif entityFilter == "free" %} Szabad járművek listája
+    {% elif entityFilter == "driven" %} Vezetett járműveim listája
+    {% endif %}
+    <a class="btn btn-primary" href="/new/vehicle">Új jármű</a>
     </h1>
     <table class="table-striped table-bordered table-hover" style="width:100%">
     <tr>
@@ -56,69 +65,19 @@
         <td>{{ vehicle.manufacturer }}</td>
         <td>{{ vehicle.type }}</td>
         <td>{{ vehicle.category }}</td>
-        <td>{% if vehicle.is_available %} Szabad {% else %} Foglalt {% endif %}</td>
+        <td>{% if vehicle.is_available %} Szabad {% else %} Nem elérhető {% endif %}</td>
         <td>{% if vehicle.is_active %} Aktív {% else %} Inaktív {% endif %}</td>
-        <td style="width:250px" align="center"><a class="btn btn-warning" href="/edit/vehicle/{{ vehicle.id }}">Módosítás</a> {% if vehicle.is_available %}{% if vehicle.is_active %} <a class="btn btn-danger" href="/inactivate/vehicle/{{ vehicle.id }}">Inaktiválás</a> {% else %} <a class="btn btn-success" href="/activate/vehicle/{{ vehicle.id }}">Aktiválás</a>{% endif %}{% endif %}</td>
+        <td style="width:250px" align="center">
+            <a class="btn btn-warning" href="/edit/vehicle/{{ vehicle.id }}">Módosítás</a>
+            <a class="btn btn-danger" href="/inactivate/vehicle/{{ vehicle.id }}">Inaktiválás</a>
+            <a class="btn btn-success" href="/activate/vehicle/{{ vehicle.id }}">Aktiválás</a>
+        </td>
     </tr>
-    {% endfor %}
-
-{% elif entityType == "vehicles" and entityFilter == "free" %}
-    <h1 id="bottom">Szabad járművek listája
-    </h1>
-    <table class="table-striped table-bordered table-hover" style="width:100%">
-    <tr>
-        <th>ID</th>
-        <th>Rendszám</th>
-        <th>Gyártó</th>
-        <th>Típus</th>
-        <th>Kategória</th>
-        <th>Elérhető</th>
-        <th>Aktív</th>
-    </tr>
-    {% for vehicle in entities %}
-    {% if vehicle.is_available and vehicle.is_active %}
-    <tr>
-        <td>{{ vehicle.id }}</td>
-        <td>{{ vehicle.license_plate }}</td>
-        <td>{{ vehicle.manufacturer }}</td>
-        <td>{{ vehicle.type }}</td>
-        <td>{{ vehicle.category }}</td>
-        <td>{% if vehicle.is_available %} Szabad {% else %} Foglalt {% endif %}</td>
-        <td>{% if vehicle.is_active %} Aktív {% else %} Inaktív {% endif %}</td>
-    </tr>
-    {% endif %}
-    {% endfor %}
-
-{% elif entityType == "vehicles" and entityFilter == "driven" %}
-    <h1 id="bottom">Vezetett járműveim listája
-    </h1>
-    <table class="table-striped table-bordered table-hover" style="width:100%">
-    <tr>
-        <th>ID</th>
-        <th>Rendszám</th>
-        <th>Gyártó</th>
-        <th>Típus</th>
-        <th>Kategória</th>
-        <th>Elérhető</th>
-        <th>Aktív</th>
-    </tr>
-    {% for vehicle in entities %}
-    {% if vehicle.is_available and vehicle.is_active %}
-    <tr>
-        <td>{{ vehicle.id }}</td>
-        <td>{{ vehicle.license_plate }}</td>
-        <td>{{ vehicle.manufacturer }}</td>
-        <td>{{ vehicle.type }}</td>
-        <td>{{ vehicle.category }}</td>
-        <td>{% if vehicle.is_available %} Szabad {% else %} Foglalt {% endif %}</td>
-        <td>{% if vehicle.is_active %} Aktív {% else %} Inaktív {% endif %}</td>
-    </tr>
-    {% endif %}
     {% endfor %}
 
 {% elif entityType == "sites" %}
-    {# <a class="btn btn-default" href="../../new/site">Új telephely</a> #}
-    <h1 id="bottom">Telephelyek listája</h1>
+        Telephelyek listája
+    </h1>
     <table class="table-striped table-bordered table-hover" style="width:100%">
     <tr>
         <th>Id</th>
@@ -139,71 +98,45 @@
     </tr>
     {% endfor %}
 
-{% elif entityType == "trips" and entityFilter == undefined %}
-    <h1 id="bottom">Túrák listája
-    {% if true %} <a class="btn btn-primary" href="/new/trip">Új túra</a>{% endif %}
-    </h1>
-    <table class="table-striped table-bordered table-hover" style="width:100%">
-    <tr>
-        <th>Id</th>
-        <th>Honnan</th>
-        <th>Hova</th>
-        <th>Dolgozó</th>
-        <th>Szállítmány</th>
-        <th>Jármű</th>
-        <th>Kezdés</th>
-        <th>Befejezés</th>
-        <th>Műveletek</th>
-    </tr>
-    {% for trip in entities %}
-    <tr>
-        <td>{{ trip.id }}</td>
-        <td>{{ trip.from_site }}</td>
-        <td>{{ trip.to_site }}</td>
-        <td>{{ trip.employee }}</td>
-        <td>{{ trip.shipment }}</td>
-        <td>{{ trip.vehicle }}</td>
-        <td>{{ trip.start_date }}</td>
-        <td>{{ trip.end_date }}</td>
-        <td style="width:250px" align="center"><a class="btn btn-warning" href="/edit/employee/">Befejezés</a> <a class="btn btn-danger" href="/inactivate/employee/">Törlés</a> <a class="btn btn-success" href="/edit/trip/{{trip.id}}">Módosítás</a></td>
-    </tr>
-    {% endfor %}
-
-{% elif entityType == "trips" and entityFilter == "own" %}
-    <h1 id="bottom">Saját túráim listája
-    {% if true %} <a class="btn btn-primary" href="/new/trip/own">Új saját túra</a>{% endif %}
-    </h1>
-    <table class="table-striped table-bordered table-hover" style="width:100%">
-    <tr>
-        <th>Id</th>
-        <th>Honnan</th>
-        <th>Hova</th>
-        <th>Dolgozó</th>
-        <th>Szállítmány</th>
-        <th>Jármű</th>
-        <th>Kezdés</th>
-        <th>Befejezés</th>
-        <th>Műveletek</th>
-    </tr>
-    {% for trip in entities %}
-    {% if trip.employee==currentUser.username %}
-    <tr>
-        <td>{{ trip.id }}</td>
-        <td>{{ trip.from_site }}</td>
-        <td>{{ trip.to_site }}</td>
-        <td>{{ trip.employee }}</td>
-        <td>{{ trip.shipment }}</td>
-        <td>{{ trip.vehicle }}</td>
-        <td>{{ trip.start_date }}</td>
-        <td>{{ trip.end_date }}</td>
-        <td style="width:250px" align="center"><a class="btn btn-warning" href="/edit/employee/">Befejezés</a> <a class="btn btn-danger" href="/inactivate/employee/">Törlés</a> <a class="btn btn-success" href="/edit/trip/{{trip.id}}">Módosítás</a></td>
-    </tr>
+{% elif entityType == "trips"%}
+    {% if entityFilter == undefined %} Túrák listája
+    {% elif entityFilter == "own" %} Saját túráim listája
     {% endif %}
+    <a class="btn btn-primary" href="/new/trip">Új túra</a>
+    </h1>
+    <table class="table-striped table-bordered table-hover" style="width:100%">
+    <tr>
+        <th>Id</th>
+        <th>Honnan</th>
+        <th>Hova</th>
+        <th>Dolgozó</th>
+        <th>Szállítmány</th>
+        <th>Jármű</th>
+        <th>Kezdés</th>
+        <th>Befejezés</th>
+        <th>Műveletek</th>
+    </tr>
+    {% for trip in entities %}
+    <tr>
+        <td>{{ trip.id }}</td>
+        <td>{{ trip.from_site }}</td>
+        <td>{{ trip.to_site }}</td>
+        <td>{{ trip.employee }}</td>
+        <td>{{ trip.shipment }}</td>
+        <td>{{ trip.vehicle }}</td>
+        <td>{{ trip.start_date }}</td>
+        <td>{{ trip.end_date }}</td>
+        <td style="width:250px" align="center">
+            <a class="btn btn-warning" href="/close/trip/{{ trip.id }}">Befejezés</a>
+            <a class="btn btn-danger" href="/delete/trip/{{ trip.id }}">Törlés</a>
+            <a class="btn btn-success" href="/edit/trip/{{trip.id}}">Módosítás</a>
+        </td>
+    </tr>
     {% endfor %}
 
 {% elif entityType == "shipments" %}
-    <h1 id="bottom">Szállítmányok listája
-    {% if true %} <a class="btn btn-primary" href="/new/shipment">Új szállítmány</a>{% endif %}
+        Szállítmányok listája
+    <a class="btn btn-primary" href="/new/shipment">Új szállítmány</a>
     </h1>
     <table class="table-striped table-bordered table-hover" style="width:100%">
     <tr>
@@ -219,7 +152,9 @@
         <td>{{ shipment.summary }}</td>
         <td>{{ shipment.type }}</td>
         <td>{{ shipment.weight }}</td>
-        <td style="width:250px" align="center"><a class="btn btn-warning" href="/edit/shipment/{{ shipment.id }}">Módosítás</a></td>
+        <td style="width:250px" align="center">
+            <a class="btn btn-warning" href="/edit/shipment/{{ shipment.id }}">Módosítás</a>
+        </td>
     </tr>
     {% endfor %}
 {% endif %}
