@@ -14,16 +14,16 @@ class ActivateController {
                 (req.currentUser.username == "Admin")
             ) {
                 var hasUnclosedTrip = false;
-                var vehicle = yield Employee.findBy('id', req.param('id'));
-                const trips = yield Database.select('*').from('trips').where('employee', vehicle.username);
+                var entity = yield Employee.findBy('id', req.param('id'));
+                const trips = yield Database.select('*').from('trips').where('employee', entity.username);
                 for (var i in trips) {
                     if (trips[i].end_date == null) {
                         hasUnclosedTrip = true;
                     }
                 }
-                if (!hasUnclosedTrip) {
-                    vehicle.is_active = false;
-                    yield vehicle.save();
+                if (!hasUnclosedTrip && entity.is_active) {
+                    entity.is_active = false;
+                    yield entity.save();
                     success = true;
                     res.redirect('back');
                 }
@@ -34,12 +34,12 @@ class ActivateController {
                 &&
                 (req.currentUser.username == "Admin")
             ) {
-                var vehicle = yield Vehicle.findBy('id', req.param('id'));
+                var entity = yield Vehicle.findBy('id', req.param('id'));
 
-                if (vehicle.is_available && vehicle.is_active) {
-                    vehicle.is_active = false;
-                    vehicle.is_available = false;
-                    yield vehicle.save();
+                if (entity.is_available && entity.is_active) {
+                    entity.is_active = false;
+                    entity.is_available = false;
+                    yield entity.save();
                     success = true;
                     res.redirect('back');
                 }
@@ -64,11 +64,13 @@ class ActivateController {
                 &&
                 (req.currentUser.username == "Admin")
             ) {
-                var employee = yield Employee.findBy('id', req.param('id'));
-                employee.is_active = true;
-                yield employee.save();
-                success = true;
-                res.redirect('back');
+                var entity = yield Employee.findBy('id', req.param('id'));
+                if (!entity.is_active) {
+                    entity.is_active = true;
+                    yield entity.save();
+                    success = true;
+                    res.redirect('back');
+                }
             }
 
             else if (
@@ -76,12 +78,12 @@ class ActivateController {
                 &&
                 (req.currentUser.username == "Admin")
             ) {
-                var vehicle = yield Vehicle.findBy('id', req.param('id'));
+                var entity = yield Vehicle.findBy('id', req.param('id'));
 
-                if (!vehicle.is_available && !vehicle.is_active) {
-                    vehicle.is_active = true;
-                    vehicle.is_available = true;
-                    yield vehicle.save();
+                if (!entity.is_available && !entity.is_active) {
+                    entity.is_active = true;
+                    entity.is_available = true;
+                    yield entity.save();
                     success = true;
                     res.redirect('back');
                 }

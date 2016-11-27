@@ -26,23 +26,19 @@ Route.get('/user/:id', function * (request, response) {
 })
 */
 Route.get('/list/:name/:filter?', 'ListController.list')
-Route.get('/new/:name/:filter?', 'CreateNewController.createNew')
-Route.post('/new/:name/:filter?', 'CreateNewController.createNewSubmit')
-Route.get('/edit/:name/:id', 'EditController.edit')
-Route.post('/edit/:name/:id', 'EditController.editSubmit')
-Route.get('/inactivate/:name/:id', 'ActivateController.inactivate')
-Route.get('/activate/:name/:id', 'ActivateController.activate')
-Route.get('/close/trip/:id', 'CloseTripController.closeTrip')
-
+Route.get('/new/:name/:filter?', 'CreateNewController.createNew').middleware('auth')
+Route.post('/new/:name/:filter?', 'CreateNewController.createNewSubmit').middleware('auth')
+Route.get('/edit/:name/:id', 'EditController.edit').middleware('auth')
+Route.post('/edit/:name/:id', 'EditController.editSubmit').middleware('auth')
+Route.get('/inactivate/:name/:id', 'ActivateController.inactivate').middleware('auth')
+Route.get('/activate/:name/:id', 'ActivateController.activate').middleware('auth')
+Route.get('/close/trip/:id', 'CloseTripController.closeTrip').middleware('auth')
+Route.get('/delete/trip/:id', 'DeleteController.deleteTrip').middleware('auth')
 
 Route.get('/login', 'AuthController.login')
 Route.post('/login', 'AuthController.loginSubmit')
 Route.get('/logout', 'AuthController.logout')
-
 Route.on('/about').render('about')
-
-Route.get('/', 'MovieController.index')
-/*Route.get('/new', 'MovieController.showNewForm')
-Route.post('/new', 'MovieController.saveNew')*/
+Route.get('/').render('index')
 
 Route.get('/protected', 'ProtectedController.index').middleware('auth')

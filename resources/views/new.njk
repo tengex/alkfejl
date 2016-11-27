@@ -1,10 +1,18 @@
 {% extends 'master' %}
 {% block content %}
+
+{% if old('errors') %}
 <ul>
+    <div class="alert alert-danger">
     {% for error in old('errors') %}
-      <li>{{ error.message }}</li>
+    
+        <li><strong>Hiba!</strong> {{ error.message }}</li>
+    
     {% endfor %}
-  </ul>
+    </div>
+</ul>
+{% endif %}
+
 <form class="form-horizontal" method="POST">
     {{ csrfField }}
   <fieldset>
@@ -46,6 +54,7 @@
             <input type="password" class="form-control" name="password2" id="inputPassword2" placeholder="Jelszó megerősítése">
         </div>
         </div>
+
     {% elif entityType=="vehicle" %}
         <legend>Új jármű</legend>
         <div class="form-group">
@@ -72,45 +81,7 @@
             <input type="text" class="form-control" id="inputCategory" name="category" value="{{ old('category') }}" placeholder="Kategória">
         </div>
         </div>
-    {# {% elif entityType=="site" %}
-        <legend>Új telephely</legend>
-        <div class="form-group">
-        <label for="username" class="col-lg-2 control-label">Felhasználónév</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputUsername" name="username" value="{{ old('username') }}" placeholder="Felhasználónév">
-        </div>
-        </div>
-        <div class="form-group">
-        <label for="fullname" class="col-lg-2 control-label">Teljes név</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputFullname" name="fullname" value="{{ old('fullname') }}" placeholder="Teljes név">
-        </div>
-        </div>
-        <div class="form-group">
-        <label for="gender" class="col-lg-2 control-label">Nem</label>
-        <div class="col-lg-10">
-            <input type="radio" id="inputGender" name="gender" value=1 checked="checked"> Férfi
-            <input type="radio" id="inputGender" name="gender" value=2> Nő
-        </div>
-        </div>
-        <div class="form-group">
-        <label for="email" class="col-lg-2 control-label">Email</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputEmail" name="email" value="{{ old('email') }}" placeholder="Email">
-        </div>
-        </div>
-        <div class="form-group">
-        <label for="telephone" class="col-lg-2 control-label">Telefon</label>
-        <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputTelephone" name="telephone" value="{{ old('telephone') }}" placeholder="Telefon">
-        </div>
-        </div>
-        <div class="form-group">
-        <label for="inputPassword" class="col-lg-2 control-label">Jelszó</label>
-        <div class="col-lg-10">
-            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Jelszó">
-        </div>
-        </div> #}
+
     {% elif entityType=="trip" and entityFilter=="own"%}
         <legend>Új saját túra</legend>
         <div class="form-group">
@@ -143,6 +114,7 @@
             <input type="text" class="form-control" id="inputVehicle" name="vehicle" value="{{ old('vehicle') }}" placeholder="Jármű">
         </div>
         </div>
+
         {% elif entityType=="trip" and entityFilter==undefined%}
         <legend>Új túra</legend>
         <div class="form-group">
@@ -175,6 +147,7 @@
             <input type="text" class="form-control" id="inputVehicle" name="vehicle" value="{{ old('vehicle') }}" placeholder="Jármű">
         </div>
         </div>
+
     {% elif entityType=="shipment" %}
         <legend>Új szállítmány</legend>
         <div class="form-group">

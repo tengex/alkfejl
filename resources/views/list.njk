@@ -99,10 +99,9 @@
     {% endfor %}
 
 {% elif entityType == "trips"%}
-    {% if entityFilter == undefined %} Túrák listája
-    {% elif entityFilter == "own" %} Saját túráim listája
+    {% if entityFilter == undefined %} Túrák listája <a class="btn btn-primary" href="/new/trip">Új túra</a>
+    {% elif entityFilter == "own" %} Saját túráim listája <a class="btn btn-primary" href="/new/trip/own">Új saját túra</a>
     {% endif %}
-    <a class="btn btn-primary" href="/new/trip">Új túra</a>
     </h1>
     <table class="table-striped table-bordered table-hover" style="width:100%">
     <tr>

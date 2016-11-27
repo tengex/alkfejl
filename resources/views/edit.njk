@@ -1,14 +1,21 @@
 {% extends 'master' %}
 {% block content %}
+
+{% if old('errors') %}
 <ul>
+    <div class="alert alert-danger">
     {% for error in old('errors') %}
-      <li>{{ error.message }}</li>
+    
+        <li><strong>Hiba!</strong> {{ error.message }}</li>
+    
     {% endfor %}
+    </div>
 </ul>
+{% endif %}
+
     <form class="form-horizontal" method="POST">
         {{ csrfField }}
     <fieldset>
-
         {% if entityType=="employee" %}
             <legend>Dolgozó módosítása</legend>
             <div class="form-group">
@@ -107,6 +114,7 @@
                 <input type="text" class="form-control" id="inputVehicle" name="vehicle" value="{{ entity.vehicle }}" placeholder="Jármű">
             </div>
             </div>
+
         {% elif entityType=="shipment" %}
             <legend>Szállítmány módosítása</legend>
             <div class="form-group">

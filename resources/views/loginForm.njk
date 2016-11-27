@@ -2,11 +2,18 @@
 
 {% block content %}
 
-  <ul>
+{% if old('errors') %}
+<ul>
+    <div class="alert alert-danger">
     {% for error in old('errors') %}
-      <li>{{ error.message }}</li>
+    
+        <li><strong>Hiba!</strong> {{ error.message }}</li>
+    
     {% endfor %}
-  </ul>
+    </div>
+</ul>
+{% endif %}
+
 <form class="form-horizontal" method="POST">
     {{ csrfField }}
   <fieldset>
