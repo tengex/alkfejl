@@ -56,7 +56,7 @@
             {% endif %}
           </ul>
 
-          {% if currentUser %}
+          {#{% if currentUser %}#}
             <p class="navbar-text navbar-right">Hello, {{ currentUser.username }}!</p>
           <ul class="nav navbar-nav">
             <li><a href="/edit/employee/{{ currentUser.id }}">Adataim módosítása</a></li>
@@ -64,11 +64,11 @@
             <li><a href="/list/vehicles/free">Szabad járművek</a></li>
             <li><a href="/list/shipments">Szállítmányok</a></li>
             <li><a href="/list/trips/own">Saját túráim</a></li>
-            {% if currentUser.username == "Admin" %}
-            <li><a href="/list/trips">Túrák</a></li>
-            {% endif %}
           </ul>
-          {% endif %}
+          <ul class="nav navbar-nav">
+            <li><a href="/list/trips">Túrák</a></li>
+          </ul>
+          {#{% endif %}#}
         </div>
       </div>
     </nav>

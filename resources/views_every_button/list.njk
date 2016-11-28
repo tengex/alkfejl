@@ -10,9 +10,7 @@
 <h1 id="bottom">
    {% if entityType == "employees" %}
    Dolgozók listája
-   {% if currentUser.username=="Admin" %}
    <a class="btn btn-primary" href="/new/employee">Új dolgozó</a>
-   {% endif %}
 </h1>
 <table class="table-striped table-bordered table-hover" style="width:100%">
 <tr>
@@ -22,9 +20,7 @@
    <th>Email</th>
    <th>Telefon</th>
    <th>Aktív</th>
-   {% if currentUser %}
    <th>Műveletek</th>
-   {% endif %}
 </tr>
 {% for employee in entities %}
 <tr>
@@ -36,20 +32,11 @@
    <td>
       {% if employee.is_active %} Aktív {% else %} Inaktív {% endif %}
    </td>
-   {% if currentUser %}
    <td style="width:250px; text-align: center;">
-      {% if currentUser.username=="Admin" or currentUser.id==employee.id %}
       <a class="btn btn-warning" href="/edit/employee/{{ employee.id }}">Módosítás</a>
-      {% endif %}
-      {% if currentUser.username=="Admin" and employee.username!="Admin"%}
-      {% if employee.is_active %}
       <a class="btn btn-danger" href="/inactivate/employee/{{ employee.id }}">Inaktiválás</a>
-      {% else %}
       <a class="btn btn-success" href="/activate/employee/{{ employee.id }}">Aktiválás</a>
-      {% endif %}
-      {% endif %}
    </td>
-   {% endif %}
 </tr>
 {% endfor %}
 {% elif entityType == "vehicles" %}
@@ -57,9 +44,7 @@
 {% elif entityFilter == "free" %} Szabad járművek listája
 {% elif entityFilter == "driven" %} Vezetett járműveim listája
 {% endif %}
-{% if currentUser.username=="Admin" %}
 <a class="btn btn-primary" href="/new/vehicle">Új jármű</a>
-{% endif %}
 </h1>
 <table class="table-striped table-bordered table-hover" style="width:100%">
 <tr>
@@ -70,9 +55,7 @@
    <th>Kategória</th>
    <th>Elérhető</th>
    <th>Aktív</th>
-   {% if currentUser.username=="Admin" %}
    <th>Műveletek</th>
-   {% endif %}
 </tr>
 {% for vehicle in entities %}
 <tr>
@@ -87,20 +70,11 @@
    <td>
       {% if vehicle.is_active %} Aktív {% else %} Inaktív {% endif %}
    </td>
-   {% if currentUser.username=="Admin" %}
    <td style="width:250px; text-align: center;">
-      {% if currentUser.username=="Admin" %}
       <a class="btn btn-warning" href="/edit/vehicle/{{ vehicle.id }}">Módosítás</a>
-      {% if vehicle.is_available and vehicle.is_active or not vehicle.is_active %}
-      {% if vehicle.is_active %}
       <a class="btn btn-danger" href="/inactivate/vehicle/{{ vehicle.id }}">Inaktiválás</a>
-      {% else %}
       <a class="btn btn-success" href="/activate/vehicle/{{ vehicle.id }}">Aktiválás</a>
-      {% endif %}
-      {% endif %}
-      {% endif %}
    </td>
-   {% endif %}
 </tr>
 {% endfor %}
 {% elif entityType == "sites" %}
@@ -153,17 +127,9 @@ Telephelyek listája
    <td>{{ trip.start_date }}</td>
    <td>{{ trip.end_date }}</td>
    <td style="width:250px; text-align: center;">
-      {% if trip.end_date==null %}
-      {% if currentUser.username=="Admin" or currentUser.username==trip.employee %}
       <a class="btn btn-warning" href="/close/trip/{{ trip.id }}">Befejezés</a>
-      {% endif %}
-      {% endif %}
-      {% if currentUser.username=="Admin" %}
-      {% if trip.end_date==null %}
       <a class="btn btn-danger" href="/delete/trip/{{ trip.id }}">Törlés</a>
-      {% endif %}
       <a class="btn btn-success" href="/edit/trip/{{trip.id}}">Módosítás</a>
-      {% endif %}
    </td>
 </tr>
 {% endfor %}
@@ -177,9 +143,7 @@ Szállítmányok listája
       <th>Leírás</th>
       <th>Típus</th>
       <th>Súly</th>
-      {% if currentUser.username=="Admin" %}
       <th>Műveletek</th>
-      {% endif %}
    </tr>
    {% for shipment in entities %}
    <tr>
@@ -187,11 +151,9 @@ Szállítmányok listája
       <td>{{ shipment.summary }}</td>
       <td>{{ shipment.type }}</td>
       <td>{{ shipment.weight }}</td>
-      {% if currentUser.username=="Admin" %}
       <td style="width:250px; text-align: center;">
          <a class="btn btn-warning" href="/edit/shipment/{{ shipment.id }}">Módosítás</a>
       </td>
-      {% endif %}
    </tr>
    {% endfor %}
    {% endif %}
