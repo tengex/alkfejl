@@ -42,8 +42,7 @@ class CreateNewController {
             if (!success) {
                 yield res.sendView('errors.permissionError');
             }
-
-            yield res.sendView('errors.unexpectedError');
+            return;
         }
         catch (e) {
             yield res.sendView('errors.unexpectedError');
@@ -76,6 +75,7 @@ class CreateNewController {
                 }
 
                 employeeData.password2 = undefined;
+                delete employeeData.password2;
                 employeeData.password = yield Hash.make(employeeData.password);
 
                 var employee = yield Employee.create(employeeData);
@@ -237,7 +237,7 @@ class CreateNewController {
                 }
 
                 var trip = yield Trip.create(tripData);
-                yield trip.save(); 
+                yield trip.save();
                 vehicle.is_available = false;
                 yield vehicle.save();
             }

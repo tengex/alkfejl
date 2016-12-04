@@ -135,9 +135,8 @@ class ListController {
 
             if (!success) {
                 yield res.sendView('errors.permissionError');
-            } else {
-                return;
             }
+            return;
         }
         catch (e) {
             yield res.sendView('errors.unexpectedError');

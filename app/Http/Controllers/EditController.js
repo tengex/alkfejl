@@ -48,7 +48,7 @@ class EditController {
                 success = true;
             }
 
-            else if (
+            /*else if (
                 (entityType == "trip" && entityID)
                 &&
                 (req.currentUser.username == "Admin")
@@ -59,7 +59,7 @@ class EditController {
                     entityType
                 });
                 success = true;
-            }
+            }*/
 
             else if (
                 (entityType == "shipment" && entityID)
@@ -76,9 +76,8 @@ class EditController {
 
             if (!success) {
                 yield res.sendView('errors.permissionError');
-            } else {
-                return;
             }
+            return;
         }
         catch (e) {
             yield res.sendView('errors.unexpectedError');
@@ -136,7 +135,7 @@ class EditController {
             res.redirect('/list/vehicles');
         }
 
-        else if (req.param('name') == "trip") {
+        /*else if (req.param('name') == "trip") {
             var entity = yield Trip.findBy('id', req.param('id'));
             entity.from_site = post.from_site;
             entity.to_site = post.to_site;
@@ -159,7 +158,7 @@ class EditController {
 
             yield entity.save();
             res.redirect('/list/trips');
-        }
+        }*/
 
         else if (req.param('name') == "shipment") {
             var entity = yield Shipment.findBy('id', req.param('id'));

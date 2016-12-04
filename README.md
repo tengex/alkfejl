@@ -26,7 +26,7 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 - Adminként szeretnék tudni felhasználókat felvenni és aktívvá/inaktívvá tenni, adataikat módosítani.
 - Adminként szeretnék tudni létrehozni új járművet.
 - Adminként szeretném tudni a járművek adatait módosítani és járműveket aktívvá/inaktívvá tenni.
-- Adminként szeretném tudni a túrák adatait módosítani és nem befejezett túrákat törölni.
+- Adminként szeretném tudni a nem befejezett túrákat törölni.
 - Adminként szeretném tudni a szállítmányok adatait módosítani.
 
 ##### 1.2.2. Nem funkcionális elvárások
@@ -66,15 +66,15 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 - **Admin:** az Employee jogaival rendelkezik, továbbá:
     * Létrehozhat új túrát bármely dolgozó nevében.
     * Létrehozhat új dolgozót és új járművet.
-    * Módosíthatja bármely dolgozó, jármű, túra és szállítmány adatait.
+    * Módosíthatja bármely dolgozó, jármű és szállítmány adatait.
     * Listát tekinthet meg az összes túráról.
     * Lezárhat aktív túrákat bármely dolgozó nevében.
     * Aktiválhatja/inaktiválhatja bármely dolgozót vagy járművet, amelyek eleget tesznek az aktiváláshoz/inaktiváláshoz szükséges kritériumoknak.
     * Törölhet olyan túrákat, amelyek még nincsenek lezárva.
     * A főoldalon jelentést kap az aktuális túrákról; arról, hogy melyik dolgozó mely járműveket vezette már; és arról, hogy melyik jármű mely túrákat teljesítette eddig.
 
-##### 1.4.2. Használati eset diagramok
-![](docs/images/usecase.png)
+##### 1.4.2. Használati eset diagram
+![Usecase](docs/images/usecase.png)
 
 ##### 1.4.3. Egy folyamat részletezése: túra lezárása
 1. A dolgozó az oldalon bejelentkezik.
@@ -164,11 +164,11 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 * Saját túráim
     * Új saját túra
     * Aktív túra befejezése
+    * Aktív túra törlése
 * Túrák
     * Új túra
     * Aktív túra befejezése
     * Aktív túra törlése
-    * Túrák adatainak módosítása
 * Névjegy
 * Kijelentkezés
 
@@ -177,7 +177,7 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 * **GET/login:** bejelentkező oldal
 * **POST/login:** bejelentkező adatok felküldése
 * **GET/logout:** kijelentkező oldal
-* **ON/about:** névjegy oldal
+* **GET/about:** névjegy oldal
 * **GET/list/employees:** dolgozólista oldal
 * **GET/list/vehicles:** járműlista oldal
 * **GET/list/vehicles/driven:** vezetett járműveket kilistázó oldal
@@ -200,8 +200,6 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 * **POST/edit/employee/id:** dolgozó adatainak módosítása, adatok felküldése
 * **GET/edit/vehicle/id:** jármű adatainak módosítása
 * **POST/edit/vehicle/id:** jármű adatainak módosítása, adatok felküldése
-* **GET/edit/trip/id:** túra adatainak módosítása
-* **POST/edit/trip/id:** túra adatainak módosítása, adatok felküldése
 * **GET/edit/shipment/id:** szállítmány adatainak módosítása
 * **POST/edit/shipment/id:** szállítmány adatainak módosítása, adatok felküldése
 * **GET/activate/employee/id:** dolgozó aktiválása
@@ -221,12 +219,13 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 
 #### 2.3. Osztálymodell
 ##### 2.3.1. Adatmodell
-![](docs/images/modell.png)
+![Adatmodell](docs/images/modell.png)
 
 ##### 2.3.2. Adatbázisterv
-![](docs/images/database.png)
+![Adatbázisterv](docs/images/database.png)
 
 ##### 2.3.3. Állapotdiagram
+![Állapotdiagram](docs/images/state.png)
 
 ### 3. Implementáció
 #### 3.1. Fejlesztői környezet
@@ -404,7 +403,7 @@ Az alkalmazás felhasználói telepítést nem igényel.
 2. A főoldalon nyissuk le a "Járművek által teljesített túrák" fület.
 3. A megjelenő blokk mutatja, hogy melyik jármű mely túrákat teljesítette eddig.
 
-### 6. Irodalomjegyzék, használt diagramkészítő programok
+### 6. Felhasznált források
 * https://github.com/horvathgyozo/alkfejl_minta#a-dokument%C3%A1ci%C3%B3-szerkezete
 * https://github.com/pessaai/ckd193-beadando
 * http://www.lumzy.com/
