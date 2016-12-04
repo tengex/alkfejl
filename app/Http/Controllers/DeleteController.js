@@ -23,9 +23,9 @@ class DeleteController {
 
             if (!success) {
                 yield res.sendView('errors.permissionError');
+            } else {
+                return;
             }
-
-            yield res.sendView('errors.unexpectedError');
         }
         catch (e) {
             yield res.sendView('errors.unexpectedError');

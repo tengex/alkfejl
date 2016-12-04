@@ -75,6 +75,8 @@ class IndexController {
 
                 if (!success) {
                     yield res.sendView('errors.permissionError');
+                } else {
+                    return;
                 }
             }
             else {

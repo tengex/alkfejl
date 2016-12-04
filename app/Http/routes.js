@@ -41,4 +41,4 @@ Route.get('/logout', 'AuthController.logout')
 Route.on('/about').render('about')
 Route.get('/', 'IndexController.showIndexPage')
 
-Route.get('/protected', 'ProtectedController.index').middleware('auth')
+//Route.get('/protected', 'ProtectedController.index').middleware('auth')
