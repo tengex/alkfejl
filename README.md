@@ -327,6 +327,12 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 
 ### 4. Tesztelés
 
+#### 4.1. Minta bejelentkezési adatok teszteléshez
+
+##### 4.1.1. Admin bejelentkezés
+- **Felhasználónév:** *Admin*
+- **Jelszó:** *admin*
+
 ### 5. Felhasználói dokumentáció
 #### 5.1. Ajánlott hardver-, szerverkonfiguráció
 - **Futtatáshoz szükséges operációs rendszer:** tetszőleges operációs rendszer.
