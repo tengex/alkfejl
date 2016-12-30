@@ -4,9 +4,9 @@ const Database = use('Database')
 
 class AuthController {
 
-    * showLoginForm(request, response) {
-        yield response.sendView('loginForm')
-    }
+    /*    * showLoginForm(request, response) {
+            yield response.sendView('loginForm')
+        }*/
 
     * login(req, res) {
         yield res.sendView('loginForm');
@@ -29,6 +29,20 @@ class AuthController {
             res.redirect('back')
             console.log(e);
             return
+        }
+    }
+
+    * ajaxLogin(req, res) {
+        try {
+            var post = req.post();
+            yield req.auth.attempt(post.username, post.password);
+            res.ok({
+                success: true
+            });
+        } catch (e) {
+            res.ok({
+                success: false
+            })
         }
     }
 

@@ -7,6 +7,7 @@
 #}
 
 {% block content %}
+<script src="/delete-close-activate.js"></script>
 <h1 id="bottom">
    {% if entityType == "employees" %}
    Dolgozók listája
@@ -43,9 +44,17 @@
       {% endif %}
       {% if currentUser.username=="Admin" and employee.username!="Admin"%}
       {% if employee.is_active %}
-      <a class="btn btn-danger" href="/inactivate/employee/{{ employee.id }}">Inaktiválás</a>
+      {#<a class="btn btn-danger" href="/inactivate/employee/{{ employee.id }}">Inaktiválás</a>#}
+      <form class="inactivateEmployee" action = "/inactivate/employee/{{ employee.id }}" method="GET">
+      {{ csrfField }}
+        <input class="btn btn-danger" type="submit" value="Inaktiválás"/>
+      </form>
       {% else %}
-      <a class="btn btn-success" href="/activate/employee/{{ employee.id }}">Aktiválás</a>
+      {#<a class="btn btn-success" href="/activate/employee/{{ employee.id }}">Aktiválás</a>#}
+      <form class="activateEmployee" action = "/activate/employee/{{ employee.id }}" method="GET">
+      {{ csrfField }}
+        <input class="btn btn-success" type="submit" value="Aktiválás"/>
+      </form>
       {% endif %}
       {% endif %}
    </td>
@@ -82,7 +91,7 @@
    <td>{{ vehicle.type }}</td>
    <td>{{ vehicle.category }}</td>
    <td>
-      {% if vehicle.is_available %} Szabad {% else %} Nem elérhető {% endif %}
+      {% if vehicle.is_available %} Szabad {% else %} Foglalt {% endif %}
    </td>
    <td>
       {% if vehicle.is_active %} Aktív {% else %} Inaktív {% endif %}
@@ -93,9 +102,17 @@
       <a class="btn btn-warning" href="/edit/vehicle/{{ vehicle.id }}">Módosítás</a>
       {% if vehicle.is_available and vehicle.is_active or not vehicle.is_active %}
       {% if vehicle.is_active %}
-      <a class="btn btn-danger" href="/inactivate/vehicle/{{ vehicle.id }}">Inaktiválás</a>
+      {#<a class="btn btn-danger" href="/inactivate/vehicle/{{ vehicle.id }}">Inaktiválás</a>#}
+      <form class="inactivateVehicle" action = "/inactivate/vehicle/{{ vehicle.id }}" method="GET">
+      {{ csrfField }}
+        <input class="btn btn-danger" type="submit" value="Inaktiválás"/>
+      </form>
       {% else %}
-      <a class="btn btn-success" href="/activate/vehicle/{{ vehicle.id }}">Aktiválás</a>
+      {#<a class="btn btn-success" href="/activate/vehicle/{{ vehicle.id }}">Aktiválás</a>#}
+      <form class="activateVehicle" action = "/activate/vehicle/{{ vehicle.id }}" method="GET">
+      {{ csrfField }}
+        <input class="btn btn-success" type="submit" value="Aktiválás"/>
+      </form>
       {% endif %}
       {% endif %}
       {% endif %}
@@ -155,14 +172,21 @@ Telephelyek listája
    <td style="width:250px; text-align: center;">
       {% if trip.end_date==null %}
       {% if currentUser.username=="Admin" or currentUser.username==trip.employee %}
-      <a class="btn btn-warning" href="/close/trip/{{ trip.id }}">Befejezés</a>
+      {#<a class="btn btn-warning" href="/close/trip/{{ trip.id }}">Befejezés</a>#}
+      <form class="closeTrip" action = "/close/trip/{{ trip.id }}" method="GET">
+      {{ csrfField }}
+        <input class="btn btn-warning" type="submit" value="Befejezés"/>
+      </form>
       {% endif %}
       {% endif %}
       {% if currentUser.username=="Admin" %}
       {% if trip.end_date==null %}
-      <a class="btn btn-danger" href="/delete/trip/{{ trip.id }}">Törlés</a>
+      {#<a class="btn btn-danger deleteTrip" href="/delete/trip/{{ trip.id }}">Törlés</a>#}
+      <form class="deleteTrip" action = "/delete/trip/{{ trip.id }}" method="GET">
+      {{ csrfField }}
+        <input class="btn btn-danger" type="submit" value="Törlés"/>
+      </form>
       {% endif %}
-      {#<a class="btn btn-success" href="/edit/trip/{{trip.id}}">Módosítás</a>#}
       {% endif %}
    </td>
 </tr>

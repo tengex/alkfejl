@@ -41,4 +41,14 @@ Route.get('/logout', 'AuthController.logout')
 Route.on('/about').render('about')
 Route.get('/', 'IndexController.showIndexPage')
 
-//Route.get('/protected', 'ProtectedController.index').middleware('auth')
+Route.group('ajax', function () {
+  Route.post('/inactivate/:name/:id', 'ActivateController.ajaxInactivate')
+  Route.post('/activate/:name/:id', 'ActivateController.ajaxActivate')
+  Route.post('/close/trip/:id', 'CloseTripController.ajaxCloseTrip')
+  Route.delete('/delete/trip/:id', 'DeleteController.ajaxDeleteTrip')
+
+  Route.post('/login', 'AuthController.ajaxLogin')
+
+  Route.get('/suggest', 'CreateNewController.ajaxSuggest')
+}).prefix('/ajax');
+

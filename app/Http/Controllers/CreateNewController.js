@@ -10,6 +10,70 @@ const Site = use('App/Model/Site')
 const Database = use('Database')
 
 class CreateNewController {
+    * ajaxSuggest(req, res) {
+        var suggestions = {};
+        const q = req.input('q');
+        const select = {
+            From_site: "name",
+            To_site: "name",
+            Employee: "username",
+            Vehicle: "license_plate",
+            Shipment: "id"
+        };
+        const from = {
+            From_site: "sites",
+            To_site: "sites",
+            Employee: "employees",
+            Vehicle: "vehicles",
+            Shipment: "shipments"
+        };
+
+        for (let i = 0; i < q.length; i++) {
+            const results = yield Database.select(select[q[i]]).from(from[q[i]]);
+            suggestions[q[i]] = [];
+            for (let j = 0; j < results.length; j++) {
+                let useableValue = true;
+
+                if (q[i] == "Vehicle") {
+                    let vehicle = yield Vehicle.findBy('license_plate', (results[j])[select[q[i]]]);
+                    if (!vehicle.is_active || !vehicle.is_available) {
+                        useableValue = false;
+                    }
+                }
+
+                if (q[i] == "Employee") {
+                    let hasUnclosedTrip = false;
+                    let employee = yield Employee.findBy('username', (results[j])[select[q[i]]]);
+                    if (!employee.is_active) {
+                        useableValue = false;
+                    }
+
+                    let trips = yield Database.select('*').from('trips').where('employee', employee.username);
+                    for (let k in trips) {
+                        if (trips[k].end_date == null) {
+                            hasUnclosedTrip = true;
+                        }
+                    }
+
+                    if (hasUnclosedTrip) {
+                        useableValue = false;
+                    }
+                }
+
+                if (useableValue) {
+                    (suggestions[q[i]])[suggestions[q[i]].length] = (results[j])[select[q[i]]];
+                }
+            }
+        }
+
+        console.log("############################")
+        console.log(suggestions)
+        console.log("############################")
+
+        yield res.ok(suggestions);
+        return;
+    }
+
     * createNew(req, res) {
         try {
             const entityType = req.param('name');
