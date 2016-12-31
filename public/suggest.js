@@ -1,11 +1,4 @@
 $(function () {
-    /*
-    var $inputFrom_site = $('#inputFrom_site');
-    var $inputTo_site = $('#inputTo_site');
-    var $inputEmployee = $('#inputEmployee');
-    var $inputVehicle = $('#inputVehicle');
-    var $inputShipment = $('#inputShipment');
-    */
     var $divFrom_site = $('#divFrom_site');
     var $divTo_site = $('#divTo_site');
     var $divEmployee = $('#divEmployee');
@@ -102,7 +95,6 @@ $(function () {
         }).done(function (result) {
             console.log(result);
             suggestions = result;
-            //console.log($divEmployee.find('.form-control')[0].readOnly)
 
             $divFrom_site.html(generate_select_From_site);
             $divTo_site.html(generate_select_To_site);
@@ -113,53 +105,4 @@ $(function () {
             }
         });
     });
-    /*
-        $inputFrom_site.on('focus', function (event) {
-            let html = '';
-            for (let i = 0; i < suggestions["From_site"].length; i++) {
-                const suggestion = (suggestions["From_site"])[i];
-                if (suggestion == $inputTo_site["0"].value) { continue; }
-                html += '<option value="' + suggestion + '">' + suggestion + '</option>';
-                //html += '<a class="list-group-item" href="javascript:void(0);" onclick="choose(\'' + (suggestions["From_site"])[i] + '\',\'InputFrom_site\');">' + (suggestions["From_site"])[i] + '</a>';
-            }
-            $inputFrom_site.html(html);
-        });
-    
-        $inputTo_site.on('focus', function (event) {
-            let html = '';
-            for (let i = 0; i < suggestions["To_site"].length; i++) {
-                const suggestion = (suggestions["To_site"])[i];
-                if (suggestion == $inputFrom_site["0"].value) { continue; }
-                html += '<option value="' + suggestion + '">' + suggestion + '</option>';
-            }
-            $inputTo_site.html(html);
-        });
-    
-        $inputEmployee.on('focus', function (event) {
-            let html = '';
-            for (let i = 0; i < suggestions["Employee"].length; i++) {
-                const suggestion = (suggestions["Employee"])[i];
-                html += '<option value="' + suggestion + '">' + suggestion + '</option>';
-            }
-            $inputEmployee.html(html);
-        });
-    
-        $inputVehicle.on('focus', function (event) {
-            let html = '';
-            for (let i = 0; i < suggestions["Vehicle"].length; i++) {
-                const suggestion = (suggestions["Vehicle"])[i];
-                html += '<option value="' + suggestion + '">' + suggestion + '</option>';
-            }
-            $inputVehicle.html(html);
-        });
-    
-        $inputShipment.on('focus  ', function (event) {
-            let html = '';
-            for (let i = 0; i < suggestions["Shipment"].length; i++) {
-                const suggestion = (suggestions["Shipment"])[i];
-                html += '<option value="' + suggestion + '">' + suggestion + '</option>';
-            }
-            $inputShipment.html(html);
-        });
-    */
 });

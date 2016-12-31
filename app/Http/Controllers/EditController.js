@@ -48,19 +48,6 @@ class EditController {
                 success = true;
             }
 
-            /*else if (
-                (entityType == "trip" && entityID)
-                &&
-                (req.currentUser.username == "Admin")
-            ) {
-                var entity = yield Trip.findBy('id', entityID);
-                yield res.sendView('edit', {
-                    entity: entity.toJSON(),
-                    entityType
-                });
-                success = true;
-            }*/
-
             else if (
                 (entityType == "shipment" && entityID)
                 &&
@@ -134,31 +121,6 @@ class EditController {
             yield entity.save();
             res.redirect('/list/vehicles');
         }
-
-        /*else if (req.param('name') == "trip") {
-            var entity = yield Trip.findBy('id', req.param('id'));
-            entity.from_site = post.from_site;
-            entity.to_site = post.to_site;
-            entity.employee = post.employee;
-            entity.shipment = post.shipment;
-            entity.vehicle = post.vehicle;
-            entity.start_date = post.start_date;
-            entity.end_date = post.end_date;
-
-            const validation = yield Validator.validateAll(entity, Trip.rulesEdit);
-            if (validation.fails()) {
-                yield req
-                    .without()
-                    .andWith({ errors: validation.messages() })
-                    .flash();
-
-                res.redirect('back');
-                return;
-            }
-
-            yield entity.save();
-            res.redirect('/list/trips');
-        }*/
 
         else if (req.param('name') == "shipment") {
             var entity = yield Shipment.findBy('id', req.param('id'));

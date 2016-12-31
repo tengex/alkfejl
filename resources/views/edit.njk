@@ -1,6 +1,7 @@
 {% extends 'master' %}
 {% block content %}
 <script src="/downloaded/validator.min.js"></script>
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>#}
 {% if old('errors') %}
 <div class="alert alert-danger">
    <ul>
@@ -121,7 +122,8 @@
       <div class="form-group">
          <label class="col-lg-2 control-label" for="inputSummary">Leírás</label>
          <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputSummary" name="summary" value="{{ entity.summary }}" placeholder="Leírás" required data-required-error="A mező kitöltése kötelező!">
+            <textarea class="form-control" id="inputSummary" name="summary" value="{{ entity.summary }}" placeholder="Leírás" required data-required-error="A mező kitöltése kötelező!">{{ entity.summary }}</textarea>
+            <!--<input type="text" class="form-control" id="inputSummary" name="summary" value="{{ entity.summary }}" placeholder="Leírás" required data-required-error="A mező kitöltése kötelező!">-->
             <div class="help-block with-errors"></div>
          </div>
       </div>

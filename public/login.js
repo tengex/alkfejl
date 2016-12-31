@@ -1,8 +1,4 @@
 $(function () {
-    $('#akt_turak_link').on('click', function (event) {
-        console.log("what")
-    });
-
     var $loginLink = $('#login-link');
 
     var $loginDialog = $(`

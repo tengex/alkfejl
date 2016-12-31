@@ -10,8 +10,9 @@ class ShipmentSeeder {
     const id = yield Database
       .table('shipments')
       .insert([
-        { summary: "Első szállítmány", type: "Utasok", weight: "30*80kg"},
-        { summary: "Második", type: "Utasok", weight: "1000kg"}
+        { summary: "2fő felnőtt;\n3fő gyerek;\n", type: "Utasok", weight: "250kg"},
+        { summary: "10fő munkás;\n2fő főnök;\n", type: "Utasok", weight: "1060kg"},
+        { summary: "1db kutya;\n1db macska;\n", type: "Állatok", weight: ""}
       ]);
   }
 

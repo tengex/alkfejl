@@ -16,11 +16,6 @@ class Vehicle extends Lucid {
             manufacturer: 'required'
         }
     }
-
-    /*trips() {
-        return this.hasMany('App/Model/Trip', 'license_plate', 'vehicle');
-    }*/
-
 }
 
 module.exports = Vehicle

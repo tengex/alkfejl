@@ -22,10 +22,6 @@ class Trip extends Lucid {
             vehicle: 'required'
         }
     }*/
-
-    /*vehicle() {
-        return this.belongsTo('App/Model/Vehicle');
-    }*/
 }
 
 module.exports = Trip

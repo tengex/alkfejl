@@ -17,18 +17,10 @@ class CreateNewController {
         const inputValue = decodeURIComponent(query[1]);
         var badRequest = true;
 
-        /*console.log("-------------------------------------------------------------")
-        console.log("ajaxValidateInputs")
-        console.log(inputName)
-        console.log(inputValue)
-        console.log("-------------------------------------------------------------")*/
         console.log("ajaxValidateInputs")
 
         if (entityType == "employee") {
             const entity = yield Employee.findBy(inputName, inputValue);
-            /*console.log(inputName)
-            console.log(inputValue)
-            console.log(entity)*/
             if (entity == null) {
                 badRequest = false;
             } else {
@@ -108,11 +100,7 @@ class CreateNewController {
             }
         }
 
-        console.log("############################")
-        console.log(suggestions)
-        console.log("############################")
-
-        yield res.ok(suggestions);
+        res.ok(suggestions);
         return;
     }
 

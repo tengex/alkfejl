@@ -3,6 +3,8 @@
 {% block content %}
 <script src="/suggest.js"></script>
 <script src="/downloaded/validator.min.js"></script>
+{#<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>#}
+<script src="/createShipment.js"></script>
 {% if old('errors') %}
 <div class="alert alert-danger">
    <ul>
@@ -135,10 +137,21 @@
       <div class="form-group">
          <label class="col-lg-2 control-label" for="inputSummary">Leírás</label>
          <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputSummary" name="summary" value="{{ old('summary') }}" placeholder="Leírás" required data-required-error="A mező kitöltése kötelező!">
+            <!--<input type="text" class="form-control" id="inputSummary" name="summary" value="{{ old('summary') }}" placeholder="Leírás" required data-required-error="A mező kitöltése kötelező!">-->
+            <textarea class="form-control" id="inputSummary" name="summary" value="{{ old('summary') }}" placeholder="Leírás" required data-required-error="A mező kitöltése kötelező!">{{ old('summary') }}</textarea>
             <div class="help-block with-errors"></div>
          </div>
       </div>
+      <div class="form-group">
+         <label class="col-lg-2 control-label">Leírás bővítése</label>
+         <div class="col-md-2">
+           <button type="button" class="btn btn-success btn-block" id="add">
+             <span aria-hidden="true">Új szállított elem</span>
+           </button>
+           <a href="javascript:void(0);" id="leirasSubmit" class="btn btn-warning btn-block">Adatok összegzése</a>
+         </div>
+      </div>
+      <div id="shipmentItems"></div>
       <div class="form-group">
          <label class="col-lg-2 control-label">Típus</label>
          <div class="col-lg-10">
