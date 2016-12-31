@@ -12,7 +12,10 @@
    {% if entityType == "employees" %}
    Dolgozók listája
    {% if currentUser.username=="Admin" %}
-   <a class="btn btn-primary" href="/new/employee">Új dolgozó</a>
+   {#<a class="btn btn-primary" href="/new/employee">Új dolgozó</a>#}
+   <form action = "/new/employee" method="GET">
+    <input class="btn btn-primary" type="submit" value="Új dolgozó"/>
+   </form>
    {% endif %}
 </h1>
 <table class="table-striped table-bordered table-hover" style="width:100%">
@@ -40,7 +43,10 @@
    {% if currentUser %}
    <td style="width:250px; text-align: center;">
       {% if currentUser.username=="Admin" or currentUser.id==employee.id %}
-      <a class="btn btn-warning" href="/edit/employee/{{ employee.id }}">Módosítás</a>
+      {#<a class="btn btn-warning" href="/edit/employee/{{ employee.id }}">Módosítás</a>#}
+      <form action = "/edit/employee/{{ employee.id }}" method="GET">
+        <input class="btn btn-warning" type="submit" value="Módosítás"/>
+      </form>
       {% endif %}
       {% if currentUser.username=="Admin" and employee.username!="Admin"%}
       {% if employee.is_active %}
@@ -67,7 +73,10 @@
 {% elif entityFilter == "driven" %} Vezetett járműveim listája
 {% endif %}
 {% if currentUser.username=="Admin" %}
-<a class="btn btn-primary" href="/new/vehicle">Új jármű</a>
+{#<a class="btn btn-primary" href="/new/vehicle">Új jármű</a>#}
+<form action = "/new/vehicle" method="GET">
+  <input class="btn btn-primary" type="submit" value="Új jármű"/>
+</form>
 {% endif %}
 </h1>
 <table class="table-striped table-bordered table-hover" style="width:100%">
@@ -99,7 +108,10 @@
    {% if currentUser.username=="Admin" %}
    <td style="width:250px; text-align: center;">
       {% if currentUser.username=="Admin" %}
-      <a class="btn btn-warning" href="/edit/vehicle/{{ vehicle.id }}">Módosítás</a>
+      {#<a class="btn btn-warning" href="/edit/vehicle/{{ vehicle.id }}">Módosítás</a>#}
+      <form action = "/edit/vehicle/{{ vehicle.id }}" method="GET">
+        <input class="btn btn-warning" type="submit" value="Módosítás"/>
+      </form>
       {% if vehicle.is_available and vehicle.is_active or not vehicle.is_active %}
       {% if vehicle.is_active %}
       {#<a class="btn btn-danger" href="/inactivate/vehicle/{{ vehicle.id }}">Inaktiválás</a>#}
@@ -143,8 +155,14 @@ Telephelyek listája
 </tr>
 {% endfor %}
 {% elif entityType == "trips"%}
-{% if entityFilter == undefined %} Túrák listája <a class="btn btn-primary" href="/new/trip">Új túra</a>
-{% elif entityFilter == "own" %} Saját túráim listája <a class="btn btn-primary" href="/new/trip/own">Új saját túra</a>
+{% if entityFilter == undefined %} Túrák listája 
+ <form action = "/new/trip" method="GET">
+  <input class="btn btn-primary" type="submit" value="Új túra"/>
+ </form>
+{% elif entityFilter == "own" %} Saját túráim listája
+ <form action = "/new/trip/own" method="GET">
+  <input class="btn btn-primary" type="submit" value="Új saját túra"/>
+ </form>
 {% endif %}
 </h1>
 <table class="table-striped table-bordered table-hover" style="width:100%">
@@ -193,7 +211,10 @@ Telephelyek listája
 {% endfor %}
 {% elif entityType == "shipments" %}
 Szállítmányok listája
-<a class="btn btn-primary" href="/new/shipment">Új szállítmány</a>
+<form action = "/new/shipment" method="GET">
+ <input class="btn btn-primary" type="submit" value="Új szállítmány"/>
+</form>
+{#<a class="btn btn-primary" href="/new/shipment">Új szállítmány</a>#}
 </h1>
 <table class="table-striped table-bordered table-hover" style="width:100%">
    <tr>
@@ -213,7 +234,10 @@ Szállítmányok listája
       <td>{{ shipment.weight }}</td>
       {% if currentUser.username=="Admin" %}
       <td style="width:250px; text-align: center;">
-         <a class="btn btn-warning" href="/edit/shipment/{{ shipment.id }}">Módosítás</a>
+         <form action = "/edit/shipment/{{ shipment.id }}" method="GET">
+          <input class="btn btn-warning" type="submit" value="Módosítás"/>
+         </form>
+         {#<a class="btn btn-warning" href="/edit/shipment/{{ shipment.id }}">Módosítás</a>#}
       </td>
       {% endif %}
    </tr>

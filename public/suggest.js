@@ -1,27 +1,100 @@
-var $inputFrom_site = '';
-var $suggestionsInputFrom_site = '';
-var $inputTo_site = '';
-var $suggestionsInputTo_site = '';
-var $inputEmployee = '';
-var $suggestionsInputEmployee = '';
-var $inputVehicle = '';
-var $suggestionsInputVehicle = '';
-var $inputShipment = '';
-var $suggestionsInputShipment = '';
-var suggestions = {};
-
 $(function () {
-    var i = 0;
-    $inputFrom_site = $('#inputFrom_site');
-    $suggestionsInputFrom_site = $('.suggestions-inputFrom_site');
-    $inputTo_site = $('#inputTo_site');
-    $suggestionsInputTo_site = $('.suggestions-inputTo_site');
-    $inputEmployee = $('#inputEmployee');
-    $suggestionsInputEmployee = $('.suggestions-inputEmployee');
-    $inputVehicle = $('#inputVehicle');
-    $suggestionsInputVehicle = $('.suggestions-inputVehicle');
-    $inputShipment = $('#inputShipment');
-    $suggestionsInputShipment = $('.suggestions-inputShipment');
+    /*
+    var $inputFrom_site = $('#inputFrom_site');
+    var $inputTo_site = $('#inputTo_site');
+    var $inputEmployee = $('#inputEmployee');
+    var $inputVehicle = $('#inputVehicle');
+    var $inputShipment = $('#inputShipment');
+    */
+    var $divFrom_site = $('#divFrom_site');
+    var $divTo_site = $('#divTo_site');
+    var $divEmployee = $('#divEmployee');
+    var $divVehicle = $('#divVehicle');
+    var $divShipment = $('#divShipment');
+    var $inputFrom_site = $divFrom_site.find('.form-control');
+    var $inputTo_site = '';
+    var $inputEmployee = '';
+    var $inputVehicle = '';
+    var $inputShipment = '';
+    var html = '';
+    var suggestions = {};
+
+    function generate_select_From_site() {
+        var html = `<select class="form-control" id="inputFrom_site" name="from_site">
+                        <option value="">Válasszon egy értéket!</option>`;
+
+        for (let i = 0; i < suggestions["From_site"].length; i++) {
+            const suggestion = (suggestions["From_site"])[i];
+            html += '<option value="' + suggestion + '"';
+            if ($divFrom_site.find('.form-control')[0].value == suggestion) {
+                html += ' selected';
+            }
+            html += '>' + suggestion + '</option>';
+        }
+
+        html += `</select>`;
+        return html;
+    }
+    function generate_select_To_site() {
+        var html = `<select class="form-control" id="inputTo_site" name="to_site">
+                        <option value="">Válasszon egy értéket!</option>`;
+        for (let i = 0; i < suggestions["To_site"].length; i++) {
+            const suggestion = (suggestions["To_site"])[i];
+            html += '<option value="' + suggestion + '"';
+            if ($divTo_site.find('.form-control')[0].value == suggestion) {
+                html += ' selected';
+            }
+            html += '>' + suggestion + '</option>';
+        }
+
+        html += `</select>`;
+        return html;
+    }
+    function generate_select_Employee() {
+        var html = `<select class="form-control" id="inputEmployee" name="employee">
+                        <option value="" selected>Válasszon egy értéket!</option>`;
+        for (let i = 0; i < suggestions["Employee"].length; i++) {
+            const suggestion = (suggestions["Employee"])[i];
+            html += '<option value="' + suggestion + '"';
+            if ($divEmployee.find('.form-control')[0].value == suggestion) {
+                html += ' selected';
+            }
+            html += '>' + suggestion + '</option>';
+        }
+
+        html += `</select>`;
+        return html;
+    }
+    function generate_select_Vehicle() {
+        var html = `<select class="form-control" id="inputVehicle" name="vehicle">
+                        <option value="" selected>Válasszon egy értéket!</option>`;
+        for (let i = 0; i < suggestions["Vehicle"].length; i++) {
+            const suggestion = (suggestions["Vehicle"])[i];
+            html += '<option value="' + suggestion + '"';
+            if ($divVehicle.find('.form-control')[0].value == suggestion) {
+                html += ' selected';
+            }
+            html += '>' + suggestion + '</option>';
+        }
+
+        html += `</select>`;
+        return html;
+    }
+    function generate_select_Shipment() {
+        var html = `<select class="form-control" id="inputShipment" name="shipment">
+                        <option value="" selected>Válasszon egy értéket!</option>`;
+        for (let i = 0; i < suggestions["Shipment"].length; i++) {
+            const suggestion = (suggestions["Shipment"])[i];
+            html += '<option value="' + suggestion + '"';
+            if ($divShipment.find('.form-control')[0].value == suggestion) {
+                html += ' selected';
+            }
+            html += '>' + suggestion + '</option>';
+        }
+
+        html += `</select>`;
+        return html;
+    }
 
     $(document).ready(function () {
         $.get('/ajax/suggest/', {
@@ -29,77 +102,64 @@ $(function () {
         }).done(function (result) {
             console.log(result);
             suggestions = result;
+            //console.log($divEmployee.find('.form-control')[0].readOnly)
+
+            $divFrom_site.html(generate_select_From_site);
+            $divTo_site.html(generate_select_To_site);
+            $divVehicle.html(generate_select_Vehicle);
+            $divShipment.html(generate_select_Shipment);
+            if (!$divEmployee.find('.form-control')[0].readOnly) {
+                $divEmployee.html(generate_select_Employee);
+            }
         });
     });
-
-    $inputFrom_site.on('focus', function (event) {
-
-        let html = '';
-        for (let i = 0; i < suggestions["From_site"].length; i++) {
-            html += '<a class="list-group-item" href="javascript:void(0);" onclick="choose(\'' + (suggestions["From_site"])[i] + '\',\'InputFrom_site\');">' + (suggestions["From_site"])[i] + '</a>';
-        }
-        $suggestionsInputFrom_site.html(html);
-        event.preventDefault();
-    });
-
-    $inputTo_site.on('focus', function (event) {
-        let html = '';
-        for (let i = 0; i < suggestions["To_site"].length; i++) {
-            html += '<a class="list-group-item" href="javascript:void(0);" onclick="choose(\'' + (suggestions["To_site"])[i] + '\',\'InputTo_site\');">' + (suggestions["To_site"])[i] + '</a>';
-        }
-        $suggestionsInputTo_site.html(html);
-        event.preventDefault();
-    });
-
-    $inputEmployee.on('focus', function (event) {
-        let html = '';
-        for (let i = 0; i < suggestions["Employee"].length; i++) {
-            html += '<a class="list-group-item" href="javascript:void(0);" onclick="choose(\'' + (suggestions["Employee"])[i] + '\',\'InputEmployee\');">' + (suggestions["Employee"])[i] + '</a>';
-        }
-        $suggestionsInputEmployee.html(html);
-        event.preventDefault();
-    });
-
-    $inputVehicle.on('focus', function (event) {
-        let html = '';
-        for (let i = 0; i < suggestions["Vehicle"].length; i++) {
-            html += '<a class="list-group-item" href="javascript:void(0);" onclick="choose(\'' + (suggestions["Vehicle"])[i] + '\',\'InputVehicle\');">' + (suggestions["Vehicle"])[i] + '</a>';
-        }
-        $suggestionsInputVehicle.html(html);
-        event.preventDefault();
-    });
-
-    $inputShipment.on('focus', function (event) {
-        let html = '';
-        for (let i = 0; i < suggestions["Shipment"].length; i++) {
-            html += '<a class="list-group-item" href="javascript:void(0);" onclick="choose(\'' + (suggestions["Shipment"])[i] + '\',\'InputShipment\');">' + (suggestions["Shipment"])[i] + '</a>';
-        }
-        $suggestionsInputShipment.html(html);
-        event.preventDefault();
-    });
+    /*
+        $inputFrom_site.on('focus', function (event) {
+            let html = '';
+            for (let i = 0; i < suggestions["From_site"].length; i++) {
+                const suggestion = (suggestions["From_site"])[i];
+                if (suggestion == $inputTo_site["0"].value) { continue; }
+                html += '<option value="' + suggestion + '">' + suggestion + '</option>';
+                //html += '<a class="list-group-item" href="javascript:void(0);" onclick="choose(\'' + (suggestions["From_site"])[i] + '\',\'InputFrom_site\');">' + (suggestions["From_site"])[i] + '</a>';
+            }
+            $inputFrom_site.html(html);
+        });
+    
+        $inputTo_site.on('focus', function (event) {
+            let html = '';
+            for (let i = 0; i < suggestions["To_site"].length; i++) {
+                const suggestion = (suggestions["To_site"])[i];
+                if (suggestion == $inputFrom_site["0"].value) { continue; }
+                html += '<option value="' + suggestion + '">' + suggestion + '</option>';
+            }
+            $inputTo_site.html(html);
+        });
+    
+        $inputEmployee.on('focus', function (event) {
+            let html = '';
+            for (let i = 0; i < suggestions["Employee"].length; i++) {
+                const suggestion = (suggestions["Employee"])[i];
+                html += '<option value="' + suggestion + '">' + suggestion + '</option>';
+            }
+            $inputEmployee.html(html);
+        });
+    
+        $inputVehicle.on('focus', function (event) {
+            let html = '';
+            for (let i = 0; i < suggestions["Vehicle"].length; i++) {
+                const suggestion = (suggestions["Vehicle"])[i];
+                html += '<option value="' + suggestion + '">' + suggestion + '</option>';
+            }
+            $inputVehicle.html(html);
+        });
+    
+        $inputShipment.on('focus  ', function (event) {
+            let html = '';
+            for (let i = 0; i < suggestions["Shipment"].length; i++) {
+                const suggestion = (suggestions["Shipment"])[i];
+                html += '<option value="' + suggestion + '">' + suggestion + '</option>';
+            }
+            $inputShipment.html(html);
+        });
+    */
 });
-
-function choose(value, where) {
-    if (where == 'InputFrom_site') {
-        console.log("InputFrom_site")
-        $inputFrom_site.val(value);
-        $suggestionsInputFrom_site.html('');
-    } else if (where == 'InputTo_site') {
-        console.log("InputTo_site")
-        $inputTo_site.val(value);
-        $suggestionsInputTo_site.html('');
-    } else if (where == 'InputEmployee') {
-        console.log("InputEmployee")
-        $inputEmployee.val(value);
-        $suggestionsInputEmployee.html('');
-    } else if (where == 'InputVehicle') {
-        console.log("InputVehicle")
-        $inputVehicle.val(value);
-        $suggestionsInputVehicle.html('');
-    } else if (where == 'InputShipment') {
-        console.log("InputShipment")
-        $inputShipment.val(value);
-        $suggestionsInputShipment.html('');
-    }
-
-}

@@ -9,7 +9,7 @@ class EmployeesSchema extends Schema {
       table.increments()
       table.string('username', 80).notNullable().unique()
       table.string('fullname', 80).notNullable()
-      table.string('email', 254).notNullable().unique()
+      table.string('email', 254).notNullable()
       table.string('telephone', 12)
       table.string('password', 60).notNullable()
       table.boolean('is_active').notNullable().defaultTo(true)

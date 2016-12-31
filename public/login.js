@@ -1,5 +1,9 @@
-$(function(){
-    var $loginLink=$('#login-link');
+$(function () {
+    $('#akt_turak_link').on('click', function (event) {
+        console.log("what")
+    });
+
+    var $loginLink = $('#login-link');
 
     var $loginDialog = $(`
         <div class="modal fade confirm-modal" tabindex="-1" role="dialog" id="loginModal">
@@ -18,9 +22,9 @@ $(function(){
     var $loginAlert = $loginDialog.find('.alert');
     $loginAlert.hide();
 
-    $loginDialog.find('.form-area').load('/login .login-form', function(){
-        $loginForm=$loginDialog.find('.login-form');
-        $loginForm.on('submit', function(e){
+    $loginDialog.find('.form-area').load('/login .login-form', function () {
+        $loginForm = $loginDialog.find('.login-form');
+        $loginForm.on('submit', function (e) {
             e.preventDefault();
 
             $.ajax({
@@ -28,21 +32,22 @@ $(function(){
                 data: $loginForm.serializeArray(),
                 type: 'POST',
                 dataType: 'json',
-            }).done(function(resp){
-                if(resp.success){
+            }).done(function (resp) {
+                if (resp.success) {
                     $loginDialog.modal('hide');
                     $('.navbar-collapse').load('/ .navbar-collapse');
-                }else{
+                    $('.container').load('/ .container');
+                } else {
                     $loginAlert.show();
                 }
             })
-            .fail(function(){
-                alert('hiba!')
-            });
+                .fail(function () {
+                    alert('hiba!')
+                });
         });
     });
 
-    $loginLink.on('click', function(e){
+    $loginLink.on('click', function (e) {
         e.preventDefault();
 
         $loginDialog.modal('show');

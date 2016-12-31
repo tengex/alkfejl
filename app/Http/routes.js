@@ -50,5 +50,6 @@ Route.group('ajax', function () {
   Route.post('/login', 'AuthController.ajaxLogin')
 
   Route.get('/suggest', 'CreateNewController.ajaxSuggest')
+  Route.get('/new/:name/validate', 'CreateNewController.ajaxValidateInputs')
 }).prefix('/ajax');
 

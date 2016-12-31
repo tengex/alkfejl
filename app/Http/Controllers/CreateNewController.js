@@ -10,6 +10,47 @@ const Site = use('App/Model/Site')
 const Database = use('Database')
 
 class CreateNewController {
+    * ajaxValidateInputs(req, res) {
+        const entityType = req.param('name');
+        const query = req.request._parsedUrl.query.split("=");
+        const inputName = query[0];
+        const inputValue = decodeURIComponent(query[1]);
+        var badRequest = true;
+
+        /*console.log("-------------------------------------------------------------")
+        console.log("ajaxValidateInputs")
+        console.log(inputName)
+        console.log(inputValue)
+        console.log("-------------------------------------------------------------")*/
+        console.log("ajaxValidateInputs")
+
+        if (entityType == "employee") {
+            const entity = yield Employee.findBy(inputName, inputValue);
+            /*console.log(inputName)
+            console.log(inputValue)
+            console.log(entity)*/
+            if (entity == null) {
+                badRequest = false;
+            } else {
+                badRequest = true;
+            }
+
+        } else if (entityType == "vehicle") {
+            const entity = yield Vehicle.findBy(inputName, inputValue);
+            if (entity == null) {
+                badRequest = false;
+            } else {
+                badRequest = true;
+            }
+        }
+
+        if (badRequest) {
+            res.status(400).send("Hiba");
+        } else {
+            res.status(200).send("OK");
+        }
+    }
+
     * ajaxSuggest(req, res) {
         var suggestions = {};
         const q = req.input('q');
@@ -29,21 +70,22 @@ class CreateNewController {
         };
 
         for (let i = 0; i < q.length; i++) {
-            const results = yield Database.select(select[q[i]]).from(from[q[i]]);
-            suggestions[q[i]] = [];
+            const type = q[i];
+            const results = yield Database.select(select[type]).from(from[type]);
+            suggestions[type] = [];
             for (let j = 0; j < results.length; j++) {
                 let useableValue = true;
 
-                if (q[i] == "Vehicle") {
-                    let vehicle = yield Vehicle.findBy('license_plate', (results[j])[select[q[i]]]);
+                if (type == "Vehicle") {
+                    let vehicle = yield Vehicle.findBy('license_plate', (results[j])[select[type]]);
                     if (!vehicle.is_active || !vehicle.is_available) {
                         useableValue = false;
                     }
                 }
 
-                if (q[i] == "Employee") {
+                if (type == "Employee") {
                     let hasUnclosedTrip = false;
-                    let employee = yield Employee.findBy('username', (results[j])[select[q[i]]]);
+                    let employee = yield Employee.findBy('username', (results[j])[select[type]]);
                     if (!employee.is_active) {
                         useableValue = false;
                     }
@@ -61,7 +103,7 @@ class CreateNewController {
                 }
 
                 if (useableValue) {
-                    (suggestions[q[i]])[suggestions[q[i]].length] = (results[j])[select[q[i]]];
+                    (suggestions[type])[suggestions[type].length] = (results[j])[select[type]];
                 }
             }
         }

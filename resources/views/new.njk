@@ -2,6 +2,7 @@
 
 {% block content %}
 <script src="/suggest.js"></script>
+<script src="/downloaded/validator.min.js"></script>
 {% if old('errors') %}
 <div class="alert alert-danger">
    <ul>
@@ -11,71 +12,82 @@
    </ul>
 </div>
 {% endif %}
-<form class="form-horizontal" method="POST">
+<form class="form-horizontal" method="POST" role="form" data-toggle="validator">
    {{ csrfField }}
    <fieldset>
       {% if entityType=="employee" %}
       <legend>Új dolgozó</legend>
       <div class="form-group">
-         <label class="col-lg-2 control-label">Felhasználónév</label>
+         <label class="col-lg-2 control-label" for="inputUsername">Felhasználónév</label>
          <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputUsername" name="username" value="{{ old('username') }}" placeholder="Felhasználónév">
+            <input type="text" class="form-control" id="inputUsername" name="username" value="{{ old('username') }}" placeholder="Felhasználónév" required data-minlength="2" data-required-error="A mező kitöltése kötelező!" data-minlength-error="Legalább 2 hosszú nevet kell megadni!" data-remote="/ajax/new/employee/validate" data-remote-error="Ez a név már foglalt!">
+            <div class="help-block with-errors"></div>
          </div>
       </div>
       <div class="form-group">
-         <label class="col-lg-2 control-label">Teljes név</label>
+         <label class="col-lg-2 control-label" for="inputFullname">Teljes név</label>
          <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputFullname" name="fullname" value="{{ old('fullname') }}" placeholder="Teljes név">
+            <input type="text" class="form-control" id="inputFullname" name="fullname" value="{{ old('fullname') }}" placeholder="Teljes név" required data-required-error="A mező kitöltése kötelező!">
+            <div class="help-block with-errors"></div>
          </div>
       </div>
       <div class="form-group">
-         <label class="col-lg-2 control-label">Email</label>
+         <label class="col-lg-2 control-label" for="inputEmail">Email</label>
          <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputEmail" name="email" value="{{ old('email') }}" placeholder="Email">
+            {#<input type="email" class="form-control" id="inputEmail" name="email" value="{{ old('email') }}" placeholder="Email" required data-type-error="Nem megfelelő formátum!" data-required-error="A mező kitöltése kötelező!" data-remote="/ajax/new/employee/validate" data-remote-error="Ez az email cím már foglalt!">#}
+            <input type="email" class="form-control" id="inputEmail" name="email" value="{{ old('email') }}" placeholder="Email" required data-type-error="Nem megfelelő formátum!" data-required-error="A mező kitöltése kötelező!">
+            <div class="help-block with-errors"></div>
          </div>
       </div>
       <div class="form-group">
          <label class="col-lg-2 control-label">Telefon</label>
          <div class="col-lg-10">
             <input type="text" class="form-control" id="inputTelephone" name="telephone" value="{{ old('telephone') }}" placeholder="Telefon">
+            <div class="help-block with-errors"></div>
          </div>
       </div>
       <div class="form-group">
-         <label class="col-lg-2 control-label">Jelszó</label>
+         <label class="col-lg-2 control-label" for="inputPassword">Jelszó</label>
          <div class="col-lg-10">
-            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Jelszó">
+            <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Jelszó" required data-required-error="A mező kitöltése kötelező!">
+            <div class="help-block with-errors"></div>
          </div>
       </div>
       <div class="form-group">
-         <label class="col-lg-2 control-label">Jelszó megerősítése</label>
+         <label class="col-lg-2 control-label" for="inputPassword2">Jelszó megerősítése</label>
          <div class="col-lg-10">
-            <input type="password" class="form-control" name="password2" id="inputPassword2" placeholder="Jelszó megerősítése">
+            <input type="password" class="form-control" name="password2" id="inputPassword2" placeholder="Jelszó megerősítése" required data-match="#inputPassword" data-required-error="A mező kitöltése kötelező!" data-match-error="Nem egyezik a két jelszó!">
+            <div class="help-block with-errors"></div>
          </div>
       </div>
       {% elif entityType=="vehicle" %}
       <legend>Új jármű</legend>
       <div class="form-group">
-         <label class="col-lg-2 control-label">Rendszám</label>
+         <label class="col-lg-2 control-label" for="inputLicense_plate">Rendszám</label>
          <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputLicense_plate" name="license_plate" value="{{ old('license_plate') }}" placeholder="Rendszám">
+            <input type="text" class="form-control" id="inputLicense_plate" name="license_plate" value="{{ old('license_plate') }}" placeholder="Rendszám" required data-required-error="A mező kitöltése kötelező!" data-remote="/ajax/new/vehicle/validate" data-remote-error="Ez a rendszám már foglalt!">
+            <div class="help-block with-errors"></div>
          </div>
       </div>
       <div class="form-group">
-         <label class="col-lg-2 control-label">Gyártó</label>
+         <label class="col-lg-2 control-label" for="inputManufacturer">Gyártó</label>
          <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputManufacturer" name="manufacturer" value="{{ old('manufacturer') }}" placeholder="Gyártó">
+            <input type="text" class="form-control" id="inputManufacturer" name="manufacturer" value="{{ old('manufacturer') }}" placeholder="Gyártó" required data-required-error="A mező kitöltése kötelező!">
+            <div class="help-block with-errors"></div>
          </div>
       </div>
       <div class="form-group">
          <label class="col-lg-2 control-label">Típus</label>
          <div class="col-lg-10">
             <input type="text" class="form-control" id="inputType" name="type" value="{{ old('type') }}" placeholder="Típus">
+            <div class="help-block with-errors"></div>
          </div>
       </div>
       <div class="form-group">
          <label class="col-lg-2 control-label">Kategória</label>
          <div class="col-lg-10">
             <input type="text" class="form-control" id="inputCategory" name="category" value="{{ old('category') }}" placeholder="Kategória">
+            <div class="help-block with-errors"></div>
          </div>
       </div>
       {% elif entityType=="trip"%}
@@ -85,25 +97,22 @@
       <legend>Új saját túra</legend>
       {% endif %}
       <div class="form-group">
-         <label class="col-lg-2 control-label">Honnan</label>
-         <div class="col-lg-10">
+         <label class="col-lg-2 control-label" for="inputFrom_site">Honnan</label>
+         <div class="col-lg-10" id="divFrom_site">
             <input type="text" class="form-control" id="inputFrom_site" name="from_site" value="{{ old('from_site') }}" placeholder="Honnan" autocomplete="off">
-            <div class="suggestions-inputFrom_site"></div>
          </div>
       </div>
       <div class="form-group">
          <label class="col-lg-2 control-label">Hova</label>
-         <div class="col-lg-10">
+         <div class="col-lg-10" id="divTo_site">
             <input type="text" class="form-control" id="inputTo_site" name="to_site" value="{{ old('to_site') }}" placeholder="Hova" autocomplete="off">
-            <div class="suggestions-inputTo_site"></div>
          </div>
       </div>
       <div class="form-group">
          <label class="col-lg-2 control-label">Dolgozó</label>
-         <div class="col-lg-10">
+         <div class="col-lg-10" id="divEmployee">
             {% if entityFilter==undefined%}
             <input type="text" class="form-control" id="inputEmployee" name="employee" value="{{ old('employee') }}" placeholder="Dolgozó" autocomplete="off">
-            <div class="suggestions-inputEmployee"></div>
             {% elif entityFilter=="own"%}
             <input type="text" class="form-control" id="inputEmployee" name="employee" value="{{ currentUser.username }}" placeholder="Dolgozó" readonly>
             {% endif %}
@@ -111,36 +120,37 @@
       </div>
       <div class="form-group">
          <label class="col-lg-2 control-label">Szállítmány</label>
-         <div class="col-lg-10">
+         <div class="col-lg-10" id="divShipment">
             <input type="text" class="form-control" id="inputShipment" name="shipment" value="{{ old('shipment') }}" placeholder="Szállítmány">
-            <div class="suggestions-inputShipment"></div>
          </div>
       </div>
       <div class="form-group">
          <label class="col-lg-2 control-label">Jármű</label>
-         <div class="col-lg-10">
+         <div class="col-lg-10" id="divVehicle">
             <input type="text" class="form-control" id="inputVehicle" name="vehicle" value="{{ old('vehicle') }}" placeholder="Jármű">
-            <div class="suggestions-inputVehicle"></div>
          </div>
       </div>
       {% elif entityType=="shipment" %}
       <legend>Új szállítmány</legend>
       <div class="form-group">
-         <label class="col-lg-2 control-label">Leírás</label>
+         <label class="col-lg-2 control-label" for="inputSummary">Leírás</label>
          <div class="col-lg-10">
-            <input type="text" class="form-control" id="inputSummary" name="summary" value="{{ old('summary') }}" placeholder="Leírás">
+            <input type="text" class="form-control" id="inputSummary" name="summary" value="{{ old('summary') }}" placeholder="Leírás" required data-required-error="A mező kitöltése kötelező!">
+            <div class="help-block with-errors"></div>
          </div>
       </div>
       <div class="form-group">
          <label class="col-lg-2 control-label">Típus</label>
          <div class="col-lg-10">
             <input type="text" class="form-control" id="inputType" name="type" value="{{ old('type') }}" placeholder="Típus">
+            <div class="help-block with-errors"></div>
          </div>
       </div>
       <div class="form-group">
          <label class="col-lg-2 control-label">Súly</label>
          <div class="col-lg-10">
             <input type="text" class="form-control" id="inputWeight" name="weight" value="{{ old('weight') }}" placeholder="Súly">
+            <div class="help-block with-errors"></div>
          </div>
       </div>
       {% endif %}

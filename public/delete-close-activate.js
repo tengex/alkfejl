@@ -62,11 +62,11 @@ $(function () {
         console.log(event.target.className);
         console.log(event.target.attributes.action.value);
         console.log("#-----------------------------------------------------------------------------");*/
+        //console.log(window.location.origin)
+        event.preventDefault();
         $method = methods[event.target.className];
         $dialog.find('.modal-body').html(texts[event.target.className]);
         $action = event.target.attributes.action.value;
         $dialog.modal('show');
-
-        event.preventDefault();
     });
 });

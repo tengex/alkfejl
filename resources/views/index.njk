@@ -1,5 +1,6 @@
 {% extends 'master' %}
 {% block content %}
+<script src="/delete-close-activate.js"></script>
 <h1 id="bottom">Főoldal</h1>
 {% if not currentUser %}
 <div class="alert alert-info">
@@ -27,12 +28,27 @@
       </div>
       <div id="collapseFour" class="panel-collapse collapse">
          <div class="panel-body">
-            <a class="btn btn-primary" href="/new/shipment">Új szállítmány létrehozása</a>
-            <a class="btn btn-primary" href="/new/trip/own">Új saját túra létrehozása</a>
+            <form action = "/new/shipment" method="GET">
+              <input class="btn btn-primary" type="submit" value="Új szállítmány létrehozása"/>
+            </form>
+            <form action = "/new/trip/own" method="GET">
+              <input class="btn btn-primary" type="submit" value="Új saját túra létrehozása"/>
+            </form>
+            {#<a class="btn btn-primary" href="/new/shipment">Új szállítmány létrehozása</a>
+            <a class="btn btn-primary" href="/new/trip/own">Új saját túra létrehozása</a>#}
             {% if currentUser.username == "Admin" %}
-            <a class="btn btn-primary" href="/new/trip/">Új túra létrehozása</a>
+            <form action = "/new/trip/" method="GET">
+              <input class="btn btn-primary" type="submit" value="Új túra létrehozása"/>
+            </form>
+            <form action = "/new/employee" method="GET">
+              <input class="btn btn-primary" type="submit" value="Új dolgozó létrehozása"/>
+            </form>
+            <form action = "/new/vehicle" method="GET">
+              <input class="btn btn-primary" type="submit" value="Új jármű létrehozása"/>
+            </form>
+            {#<a class="btn btn-primary" href="/new/trip/">Új túra létrehozása</a>
             <a class="btn btn-primary" href="/new/employee/">Új dolgozó létrehozása</a>
-            <a class="btn btn-primary" href="/new/vehicle/">Új jármű létrehozása</a>
+            <a class="btn btn-primary" href="/new/vehicle/">Új jármű létrehozása</a>#}
             {% endif %}
          </div>
       </div>
@@ -42,7 +58,7 @@
    <div class="panel panel-default" id="panel3">
       <div class="panel-heading">
          <h3 class="panel-title">
-            <a data-toggle="collapse" data-target="#collapseThree" 
+            <a id="akt_turak_link" data-toggle="collapse" data-target="#collapseThree" 
                href="#collapseThree" class="collapsed">
                {% if currentUser.username == "Admin" %}
                Aktuális túrák
@@ -64,8 +80,8 @@
                   <th>Szállítmány</th>
                   <th>Jármű</th>
                   <th>Kezdés</th>
-                  <th>Befejezés</th>
-                  <th>Műveletek</th>
+                  <!--<th>Befejezés</th>-->
+                  <!--<th>Műveletek</th>-->
                </tr>
                {% for trip in unclosedTrips %}
                <tr>
@@ -76,14 +92,21 @@
                   <td>{{ trip.shipment }}</td>
                   <td>{{ trip.vehicle }}</td>
                   <td>{{ trip.start_date }}</td>
-                  <td>{{ trip.end_date }}</td>
-                  <td style="width:250px; text-align: center;">
-                     <a class="btn btn-warning" href="/close/trip/{{ trip.id }}">Befejezés</a>
+                  <!--<td>{{ trip.end_date }}</td>-->
+                  <!--<td style="width:250px; text-align: center;">
+                     {#<a class="btn btn-warning" href="/close/trip/{{ trip.id }}">Befejezés</a>#}
+                     <form class="closeTrip" action = "/close/trip/{{ trip.id }}" method="GET">
+                        {{ csrfField }}
+                        <input class="btn btn-warning" type="submit" value="Befejezés"/>
+                     </form>
                      {% if currentUser.username == "Admin" %}
-                     <a class="btn btn-danger" href="/delete/trip/{{ trip.id }}">Törlés</a>
-                     {#<a class="btn btn-success" href="/edit/trip/{{trip.id}}">Módosítás</a>#}
+                     {#<a class="btn btn-danger" href="/delete/trip/{{ trip.id }}">Törlés</a>#}
+                     <form class="deleteTrip" action = "/delete/trip/{{ trip.id }}" method="GET">
+                        {{ csrfField }}
+                        <input class="btn btn-danger" type="submit" value="Törlés"/>
+                     </form>
                      {% endif %}
-                  </td>
+                  </td>-->
                </tr>
                {% endfor %}
             </table>
