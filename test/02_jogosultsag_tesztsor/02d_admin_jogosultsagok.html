@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:3333/" />
+<title>2d. Admin jogosultságok</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">2d. Admin jogosultságok</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=login-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputUsername</td>
+	<td>Admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputPassword</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/new/shipment</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=legend</td>
+	<td>Új szállítmány</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/new/trip</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=legend</td>
+	<td>Új túra</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/new/trip/own</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=legend</td>
+	<td>Új saját túra</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/new/employee</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=legend</td>
+	<td>Új dolgozó</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/new/vehicle</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=legend</td>
+	<td>Új jármű</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/edit/employee/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=legend</td>
+	<td>Dolgozó módosítása</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=inputUsername</td>
+	<td>Admin</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=inputFullname</td>
+	<td>Admin</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=inputEmail</td>
+	<td>admin@admin.com</td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=inputTelephone</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=inputPassword</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertValue</td>
+	<td>id=inputPassword2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/edit/employee/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=legend</td>
+	<td>Dolgozó módosítása</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/edit/employee/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=legend</td>
+	<td>Dolgozó módosítása</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/edit/vehicle/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=legend</td>
+	<td>Jármű módosítása</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/edit/shipment/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=legend</td>
+	<td>Szállítmány módosítása</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/list/employees</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bottom</td>
+	<td>Dolgozók listája</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/list/vehicles</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bottom</td>
+	<td>Járművek listája</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/list/vehicles/driven</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bottom</td>
+	<td>Vezetett járműveim listája</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/list/vehicles/free</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bottom</td>
+	<td>Szabad járművek listája</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/list/shipments</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bottom</td>
+	<td>Szállítmányok listája</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/list/trips</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bottom</td>
+	<td>Túrák listája</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/list/trips/own</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bottom</td>
+	<td>Saját túráim listája</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/list/sites</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bottom</td>
+	<td>Telephelyek listája</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/close/trip/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-danger</td>
+	<td>Hiba! Nincs megfelelő jogosultság a művelet elvégzéséhez!</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/close/trip/5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/list/trips/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotTable</td>
+	<td>//table.5.7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/activate/employee/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-danger</td>
+	<td>Hiba! Nincs megfelelő jogosultság a művelet elvégzéséhez!</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/inactivate/employee/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-danger</td>
+	<td>Hiba! Nincs megfelelő jogosultság a művelet elvégzéséhez!</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/activate/employee/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/list/employees</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.2.5</td>
+	<td>Aktív</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/activate/employee/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-danger</td>
+	<td>Hiba! Nincs megfelelő jogosultság a művelet elvégzéséhez!</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/list/employees</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/inactivate/employee/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.2.5</td>
+	<td>Inaktív</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/inactivate/employee/2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-danger</td>
+	<td>Hiba! Nincs megfelelő jogosultság a művelet elvégzéséhez!</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/activate/vehicle/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/list/vehicles</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.3.6</td>
+	<td>Aktív</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/activate/vehicle/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-danger</td>
+	<td>Hiba! Nincs megfelelő jogosultság a művelet elvégzéséhez!</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/list/vehicles</td>
+	<td></td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/inactivate/vehicle/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.3.6</td>
+	<td>Inaktív</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/inactivate/vehicle/3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-danger</td>
+	<td>Hiba! Nincs megfelelő jogosultság a művelet elvégzéséhez!</td>
+</tr>
+<tr>
+	<td>open</td>
+	<td>/delete/trip/1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-danger</td>
+	<td>Hiba! Nincs megfelelő jogosultság a művelet elvégzéséhez!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Kijelentkezés</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=login-link</td>
+	<td>Bejelentkezés</td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

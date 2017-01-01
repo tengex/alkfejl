@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:3333/" />
+<title>1b. Bejelentkezés utáni főoldalak</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">1b. Bejelentkezés utáni főoldalak</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=login-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputUsername</td>
+	<td>MathGa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputPassword</td>
+	<td>pw</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Főoldal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bottom</td>
+	<td>Főoldal</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>Üdvözöljük! Sikeresen bejelentkezett!</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-warning</td>
+	<td>A felhasználó inaktív állapotban van!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Kijelentkezés</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=login-link</td>
+	<td>Bejelentkezés</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=login-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputUsername</td>
+	<td>JiPe</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputPassword</td>
+	<td>pw</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Főoldal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bottom</td>
+	<td>Főoldal</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>Üdvözöljük! Sikeresen bejelentkezett!</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Teendők</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Új létrehozása</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=akt_turak_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-info</td>
+	<td>Nincs jelenleg úton lévő túra.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Főoldal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Új létrehozása</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Új saját túra létrehozása']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Kijelentkezés</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=login-link</td>
+	<td>Bejelentkezés</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=login-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputUsername</td>
+	<td>DeidGe</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputPassword</td>
+	<td>pw</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Főoldal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bottom</td>
+	<td>Főoldal</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>Üdvözöljük! Sikeresen bejelentkezett!</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Teendők</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Új létrehozása</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=akt_turak_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.0</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.1</td>
+	<td>Telep_A</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.2</td>
+	<td>Telep_D</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.3</td>
+	<td>DeidGe</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.4</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.5</td>
+	<td>GEX-808</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.6</td>
+	<td>2016.10.23. 12:49:43</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Kijelentkezés</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=login-link</td>
+	<td>Bejelentkezés</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=login-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputUsername</td>
+	<td>Admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputPassword</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Főoldal</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=bottom</td>
+	<td>Főoldal</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-success</td>
+	<td>Üdvözöljük! Sikeresen bejelentkezett!</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=h2</td>
+	<td>Teendők, statisztikák</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Új létrehozása</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=akt_turak_link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Dolgozók által használt járművek</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Járművek által teljesített túrák</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.0</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.1</td>
+	<td>Telep_A</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.2</td>
+	<td>Telep_C</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.3</td>
+	<td>BretKu</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.4</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.5</td>
+	<td>BSN-552</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.1.6</td>
+	<td>2016.10.22. 16:58:08</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.2.0</td>
+	<td>6</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.2.1</td>
+	<td>Telep_A</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.2.2</td>
+	<td>Telep_D</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.2.3</td>
+	<td>DeidGe</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.2.4</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.2.5</td>
+	<td>GEX-808</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseThree']/div/table.2.6</td>
+	<td>2016.10.23. 12:49:43</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.alert.alert-info</td>
+	<td>Admin (Admin) Ez a dolgozó még nem vezetett járművet.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=div.panel-body &gt; div.alert.alert-success</td>
+	<td>Mathilde Gagliardi (MathGa)</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseOne']/div/table.1.0</td>
+	<td>HHY-826</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseOne']/div/table.1.1</td>
+	<td>IKARUS</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseOne']/div/table.1.2</td>
+	<td>E95</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseOne']/div/table.1.3</td>
+	<td>Busz</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#collapseTwo &gt; div.panel-body &gt; div.alert.alert-info</td>
+	<td>ACH-131 Ehhez a járműhöz nem tartozik túra.</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=#collapseTwo &gt; div.panel-body &gt; div.alert.alert-success</td>
+	<td>BPI-729</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseTwo']/div/table[2].1.0</td>
+	<td>5</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseTwo']/div/table[2].1.1</td>
+	<td>Telep_A</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseTwo']/div/table[2].1.2</td>
+	<td>Telep_C</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseTwo']/div/table[2].1.3</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseTwo']/div/table[2].1.4</td>
+	<td>2016.10.22. 16:58:08</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//div[@id='collapseTwo']/div/table[2].1.5</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Kijelentkezés</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>id=login-link</td>
+	<td>Bejelentkezés</td>
+</tr>
+</tbody></table>
+</body>
+</html>
