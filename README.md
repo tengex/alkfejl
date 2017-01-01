@@ -361,9 +361,13 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 
 #### 5.2. Telepítés
 Az alkalmazás felhasználói telepítést nem igényel. Szerveroldali telepítéshez a következő lépéseket kell követni:
+
 1. Kód letöltése
+
     a. ZIP letöltése
+
     b. https://github.com/tengex/alkfejl klónozása
+
     c. https://github.com/tengex/alkfejl forkolása és saját repo klónozása
 2. `npm install`
 3. `npm run dev` paranccsal futtatni
@@ -463,6 +467,7 @@ Az alkalmazás felhasználói telepítést nem igényel. Szerveroldali telepít�
 
 ### 8. Kliensoldali fejlesztés
 Az alkalmazás tartalmaz kliensoldalon futó Javascript kódot is, amivel a felhasználói felület használata egyszerűbb, felhasználóbarátabb. A következő funkciókat látják el ezek a scriptek:
+
 1. Bejelentkezéskor az adatok beírása felugró ablakban, bejelentkezés a teljes oldal újratöltése nélkül.
 2. Aktiválás, inaktiválás, túratörlés, túralezárás végrehajtása előtt megerősítés kérése felugró ablakban.
 3. Új túra létrehozásánál az űrlapon lévő inputmezők lenyíló listává változnak, amelyek csak a kritériumoknak megfelelő elemek közül engednek választani.
