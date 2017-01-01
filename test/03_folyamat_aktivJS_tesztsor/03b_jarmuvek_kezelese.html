@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:3333/" />
+<title>3b. Járművek kezelése</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">3b. Járművek kezelése</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=login-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputUsername</td>
+	<td>Admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputPassword</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Járművek</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputLicense_plate</td>
+	<td>CCV-442</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>css=ul.list-unstyled &gt; li</td>
+	<td>Ez a rendszám már foglalt!</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputLicense_plate</td>
+	<td>CCV-445</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputManufacturer</td>
+	<td>IKARUS</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputType</td>
+	<td>256</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputCategory</td>
+	<td>teszt</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.0</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.1</td>
+	<td>CCV-445</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.2</td>
+	<td>IKARUS</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.3</td>
+	<td>256</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.4</td>
+	<td>teszt</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.5</td>
+	<td>Szabad</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.6</td>
+	<td>Aktív</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//input[@value='Inaktiválás'])[7]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@value='Módosítás'])[11]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputManufacturer</td>
+	<td>Ikarus,Rába</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputCategory</td>
+	<td>modositott</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.0</td>
+	<td>11</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.1</td>
+	<td>CCV-445</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.2</td>
+	<td>Ikarus,Rába</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.3</td>
+	<td>256</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.4</td>
+	<td>modositott</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.5</td>
+	<td>Foglalt</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.6</td>
+	<td>Inaktív</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//input[@value='Aktiválás'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.5</td>
+	<td>Szabad</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.11.6</td>
+	<td>Aktív</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Kijelentkezés</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

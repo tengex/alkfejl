@@ -12,8 +12,9 @@
 <tr><td rowspan="1" colspan="3">2a. Guest jogosultságok</td></tr>
 </thead><tbody>
 <!--A Base URL legyen megfelelően beállítva! (http://localhost:3333/)-->
-<!--A 02-es tesztsor (02_jogosultsag_tesztsor.html) teljes futtatása előtt az adatbázist frissíteni kell a "./ace migration:refresh; ./ace db:seed;" parancssorozattal!-->
-<!--A 02-es tesztsor visszafordíthatatlan változtatásokat eszközöl az adatbázison!-->
+<!--A 02-es tesztsor (02_jogosultsag_tesztsor.html) teljes futtatása előtt az adatbázist egyszer helyre kell állítani a "./ace migration:refresh; ./ace db:seed;" parancssorozattal!-->
+<!--A 02-es tesztsor csak adatbázis-helyreállítással visszafordítható változtatásokat eszközöl az adatbázison!-->
+<!--A 2a, 2b, 2c, 2d teszteseteket ebben a sorrendben kell végrehajtani a változtatásra kerülő adatbázistartalom miatt!-->
 <!--Futtatás előtt jelentkezzünk ki az oldalon!-->
 <tr>
 	<td>open</td>

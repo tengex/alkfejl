@@ -145,13 +145,17 @@ class ListController {
 }
 
 function timestampToDate(date) {
+    //const months = ["január", "február", "március", "április", "május", "június", "július", "augusztus", "szeptember", "október", "november", "december"];
+    const months = ["jan.", "feb.", "már.", "ápr.", "máj.", "jún.", "júl.", "aug.", "szep.", "okt.", "nov.", "dec."];
     var year = date.getFullYear();
-    var month = "0" + date.getMonth();
+    //var month = "0" + date.getMonth();
+    var month = months[date.getMonth()];
     var day = "0" + date.getDate();
     var hours = date.getHours();
     var minutes = "0" + date.getMinutes();
     var seconds = "0" + date.getSeconds();
-    return (year + "." + month.substr(-2) + "." + day.substr(-2) + ". " + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2));
+    //return (year + "." + month.substr(-2) + "." + day.substr(-2) + ". " + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2));
+    return (year + ". " + month + " " + day.substr(-2) + ". " + hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2));
 }
 
 module.exports = ListController

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:3333/" />
+<title>3c. Szállítmányok kezelése</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">3c. Szállítmányok kezelése</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=login-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputUsername</td>
+	<td>RickGr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputPassword</td>
+	<td>pw</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Szállítmányok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=input.form-control.smart-ingredient-amount</td>
+	<td>2 doboz</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=input.form-control.smart-ingredient-name</td>
+	<td>alma</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@value='1db'])[2]</td>
+	<td>3 doboz</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@value='Megnevezés'])[2]</td>
+	<td>szilva</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=add</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@value='1db'])[3]</td>
+	<td>1 doboz</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>xpath=(//input[@value='Megnevezés'])[3]</td>
+	<td>banán</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=leirasSubmit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=leirasSubmit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputType</td>
+	<td>Gyümölcsök</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputWeight</td>
+	<td>X kg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.4.0</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.4.1</td>
+	<td>2 doboz alma; 1 doboz banán;</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.4.2</td>
+	<td>Gyümölcsök</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.4.3</td>
+	<td>X kg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Kijelentkezés</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=login-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputUsername</td>
+	<td>Admin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputPassword</td>
+	<td>admin</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Szállítmányok</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//input[@value='Módosítás'])[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputSummary</td>
+	<td>2 doboz alma;<br /><br />1 doboz banán;<br /></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputSummary</td>
+	<td>2 doboz alma;<br />4 doboz narancs;<br />1 doboz banán;<br /></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputWeight</td>
+	<td>X+Y kg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.4.0</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.4.1</td>
+	<td>2 doboz alma; 4 doboz narancs; 1 doboz banán;</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.4.2</td>
+	<td>Gyümölcsök</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.4.3</td>
+	<td>X+Y kg</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Kijelentkezés</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

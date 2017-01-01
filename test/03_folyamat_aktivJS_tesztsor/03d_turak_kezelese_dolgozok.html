@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:3333/" />
+<title>3d. Túrák kezelése</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">3d. Túrák kezelése</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectWindow</td>
+	<td>null</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>id=login-link</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputUsername</td>
+	<td>JiPe</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=inputPassword</td>
+	<td>pw</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Saját túráim</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=input.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=inputFrom_site</td>
+	<td>label=Telep_B</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=inputTo_site</td>
+	<td>label=Telep_D</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=inputShipment</td>
+	<td>label=2</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=inputVehicle</td>
+	<td>label=HHY-826</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=button.btn.btn-primary</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.1.0</td>
+	<td>7</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.1.1</td>
+	<td>Telep_B</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.1.2</td>
+	<td>Telep_D</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.1.3</td>
+	<td>JiPe</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.1.4</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.1.5</td>
+	<td>HHY-826</td>
+</tr>
+<tr>
+	<td>assertNotTable</td>
+	<td>//table.1.6</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.1.7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Járművek</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.2.5</td>
+	<td>Foglalt</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.2.6</td>
+	<td>Aktív</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Saját túráim</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=input.btn.btn-warning</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=(//button[@type='button'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>2500</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertNotTable</td>
+	<td>//table.1.7</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Járművek</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.2.5</td>
+	<td>Szabad</td>
+</tr>
+<tr>
+	<td>assertTable</td>
+	<td>//table.2.6</td>
+	<td>Aktív</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Kijelentkezés</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
