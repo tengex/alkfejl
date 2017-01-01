@@ -99,8 +99,6 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
     * "Új létrehozása" lenyíló blokk:
         * Új szállítmány létrehozása
         * Új saját túra létrehozása
-    * "Aktuális túra" lenyíló blokk:
-        * Túra befejezése
 * Dolgozók
     * Bejelentkezett dolgozó saját adatainak módosítása
 * Járművek
@@ -138,8 +136,6 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
         * Új túra létrehozása
         * Új dolgozó létrehozása
         * Új jármű létrehozása
-    * "Aktuális túra" lenyíló blokk:
-        * Túra befejezése
     * "Dolgozók által használt járművek" lenyíló blokk
     * "Járművek által teljesített túrák" lenyíló blokk
 * Dolgozók
@@ -224,7 +220,15 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 ##### 2.3.2. Adatbázisterv
 ![Adatbázisterv](docs/images/database.png)
 
-##### 2.3.3. Állapotdiagram
+##### 2.3.3. Táblakapcsolatok típusaira példák
+###### 2.3.3.1. EGY-EGY kapcsolat
+* Telephelyek és adataik *(sites - site_infos)*
+###### 2.3.3.2. EGY-SOK kapcsolat
+* Járművek által teljesített túrák *(vehicles-trips)*
+###### 2.3.3.3. SOK-SOK kapcsolat
+* Dolgozók által vezetett járművek *(employees-trips-vehicles)*
+
+##### 2.3.4. Állapotdiagram
 ![Állapotdiagram](docs/images/state.png)
 
 ### 3. Implementáció
@@ -253,11 +257,9 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
         * *EditController.js*
         * *IndexController.js*
         * *ListController.js*
-        * *ProtectedController.js*
     * **Listeners**
         * *Http.js*
     * **Model**
-        * *Actor.js*
         * *Employee.js*
         * *Shipment.js*
         * *Site.js*
@@ -302,7 +304,15 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
     * **images**: a dokumentációban szereplő képek
 * **node_modules:** Node modulok
 * **public**
-    * *bootstrap.min.css*
+    * **downloaded:** letöltött anyagok gyorsabb működés érdekében
+        * *bootstrap.min.css*
+        * *jquery-3.1.1.min.js*
+        * *validator.min.js*
+    * *createShipment.js*
+    * *delete-close-activate.js*
+    * *login.js*
+    * *style.css*
+    * *suggest.js*
 * **resources**
     * **views**
         * *about.njk*
@@ -316,7 +326,13 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
         * *index.njk*
         * *permissionError.njk*
         * *unexpectedError.njk*
-    * **views_every_button:** szerkezete ugyanaz, mint a **views** mappának, de az itteni nézetek minden gombot tartalmaznak, azokat is, amik használatához nincs jogosultság. Az alkalmazás ezeket a fájlokat nem használja, csak kézi tesztelés céljából vannak jelen
+* **test**
+    * **01_alap_tesztsor:** az 1-es tesztsor teszteseteinek fájljai
+    * **02_jogosultsag_tesztsor:** a 2-es tesztsor teszteseteinek fájljai
+    * **03_folyamat_aktivJS_tesztsor:** a 3-as tesztsor teszteseteinek fájljai
+    * *01_alap_tesztsor.html*
+    * *02_jogosultsag_tesztsor.html*
+    * *03_folyamat_aktivJS_tesztsor.html*
 * *ace*
 * *CHANGELOG.md*
 * *notes.md*
@@ -330,8 +346,12 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 #### 4.1. Minta bejelentkezési adatok teszteléshez
 
 ##### 4.1.1. Admin bejelentkezés
-- **Felhasználónév:** *Admin*
-- **Jelszó:** *admin*
+- **Felhasználónév:** `Admin`
+- **Jelszó:** `admin`
+
+##### 4.1.2. Bejelentkezés a többi dolgozóval
+- **Felhasználónév:** a dolgozó felhasználóneve
+- **Jelszó:** `pw`
 
 ### 5. Felhasználói dokumentáció
 #### 5.1. Ajánlott hardver-, szerverkonfiguráció
@@ -340,7 +360,14 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 - **Egyéb követelmények:** internet böngésző telepítése, JavaScript ajánlott
 
 #### 5.2. Telepítés
-Az alkalmazás felhasználói telepítést nem igényel.
+Az alkalmazás felhasználói telepítést nem igényel. Szerveroldali telepítéshez a következő lépéseket kell követni:
+1. Kód letöltése
+    a. ZIP letöltése
+    b. https://github.com/tengex/alkfejl klónozása
+    c. https://github.com/tengex/alkfejl forkolása és saját repo klónozása
+2. `npm install`
+3. `npm run dev` paranccsal futtatni
+4. `localhost:3333` megnyitása
 
 #### 5.3. A program használata
 ##### 5.3.1. Bejelentkezés/kijelentkezés
@@ -414,3 +441,30 @@ Az alkalmazás felhasználói telepítést nem igényel.
 * https://github.com/pessaai/ckd193-beadando
 * http://www.lumzy.com/
 * http://nomnoml.com/
+
+### 7. Változtatások a második beadandó részein
+#### 7.1. Dokumentáció
+* Táblakapcsolatok típusaira példák leírása *(2.3.3. alfejezet)*
+* Oldaltérkép részben az "Aktuális túra" alpont törlése, mivel a programban az ottani gomb meg lett szüntetve *(2.1.1. alfejezet)*
+* Könyvtárstruktúra frissítése a harmadik beadandó során bekövetkezett változásokkal *(3.2. alfejezet)*
+* Szerveroldali telepítés lépéseinek leírása *(5.2. alfejezet)*
+#### 7.2. Forráskód
+* **list.njk:** az összes `<a>` típusú gomb lecserélése `<form>` típusúra.
+* **index.njk:** az összes `<a>` típusú gomb lecserélése `<form>` típusúra.
+* **new.njk:** *új túra* és *új saját túra* HTML kódjainak összevonása `if` és `elif` elágazásokkal (redundancia csökkentése).
+* **list.njk:** járművek listáinál az *Elérhető* oszlopban a `Nem elérhető` értékek helyett `Foglalt` szerepel.
+* **master.njk:** az eddig is funkció nélküli keresőmező eltüntetése.
+* **Adatbázis:** az *employee* *email* mezőjére nincs megkötés az egyediséget illetően, mivel egy dolgozót a felhasználóneve alapján azonosítunk *(1479658110340_employees.js, Model/Employee.js)*
+* **new.njk, edit.njk:** szállítmány létrehozásánál és szerkesztésénél az űrlapon a *Leírás* mező `<textarea>` lett.
+* Fölösleges (eddig is kikommentelt) kódok kitörölgetése a fájlokból.
+* **ListController.js, IndexController.js:** a `timestampToDate(date)` függvény más formátumban adja vissza a dátumokat, mint eddig.
+* **seeds/Shipment.js, seeds/Vehicle.js:** új adatbázisfeltöltő adatsorozatok hozzáadása.
+* **index.njk:** az összecsukható/kinyitható panelek alapesetben nyitva vannak.
+
+### 8. Kliensoldali fejlesztés
+Az alkalmazás tartalmaz kliensoldalon futó Javascript kódot is, amivel a felhasználói felület használata egyszerűbb, felhasználóbarátabb. A következő funkciókat látják el ezek a scriptek:
+1. Bejelentkezéskor az adatok beírása felugró ablakban, bejelentkezés a teljes oldal újratöltése nélkül.
+2. Aktiválás, inaktiválás, túratörlés, túralezárás végrehajtása előtt megerősítés kérése felugró ablakban.
+3. Új túra létrehozásánál az űrlapon lévő inputmezők lenyíló listává változnak, amelyek csak a kritériumoknak megfelelő elemek közül engednek választani.
+4. Beviteli mezőkbe írt adatok automatikus ellenőrzése a következő elemek létrehozásánál/szerkesztésénél: *employee, vehicle, shipment*.
+5. Szállítmány létrehozásánál a szállított egységek mennyiségét és megnevezését interaktív gombokkal lehet megadni.

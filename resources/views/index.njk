@@ -21,12 +21,12 @@
       <div class="panel-heading">
          <h3 class="panel-title">
             <a data-toggle="collapse" data-target="#collapseFour" 
-               href="#collapseFour" class="collapsed">
+               href="#collapseFour">
             Új létrehozása
             </a>
          </h3>
       </div>
-      <div id="collapseFour" class="panel-collapse collapse">
+      <div id="collapseFour" class="panel-collapse collapse in">
          <div class="panel-body">
             <form action = "/new/shipment" method="GET">
               <input class="btn btn-primary" type="submit" value="Új szállítmány létrehozása"/>
@@ -59,7 +59,7 @@
       <div class="panel-heading">
          <h3 class="panel-title">
             <a id="akt_turak_link" data-toggle="collapse" data-target="#collapseThree" 
-               href="#collapseThree" class="collapsed">
+               href="#collapseThree">
                {% if currentUser.username == "Admin" %}
                Aktuális túrák
                {% else %}
@@ -68,7 +68,7 @@
             </a>
          </h3>
       </div>
-      <div id="collapseThree" class="panel-collapse collapse">
+      <div id="collapseThree" class="panel-collapse collapse in">
          <div class="panel-body">
             {% if unclosedTrips.length != 0 %}
             <table class="table-striped table-bordered table-hover" style="width:100%">
@@ -125,12 +125,12 @@
       <div class="panel-heading">
          <h3 class="panel-title">
             <a data-toggle="collapse" data-target="#collapseOne" 
-               href="#collapseOne" class="collapsed">
+               href="#collapseOne">
             Dolgozók által használt járművek
             </a>
          </h3>
       </div>
-      <div id="collapseOne" class="panel-collapse collapse">
+      <div id="collapseOne" class="panel-collapse collapse in">
          <div class="panel-body">
             {% for employee in employeesVehicles%}
             {% if employee.vehicleList.length == 0 %}
@@ -170,12 +170,12 @@
       <div class="panel-heading">
          <h3 class="panel-title">
             <a data-toggle="collapse" data-target="#collapseTwo" 
-               href="#collapseTwo" class="collapsed">
+               href="#collapseTwo">
             Járművek által teljesített túrák
             </a>
          </h3>
       </div>
-      <div id="collapseTwo" class="panel-collapse collapse">
+      <div id="collapseTwo" class="panel-collapse collapse in">
          <div class="panel-body">
             {% for vehicle in vehiclesTrips%}
             {% if vehicle.tripList.length == 0 %}
