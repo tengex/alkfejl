@@ -1,6 +1,18 @@
 # Alkalmazások fejlesztése feladat dokumentációja
 ## Cég belső szállítmányozását nyilvántartó rendszer
 
+### Tartalomjegyzék
+
+1. Követelményanalízis
+2. Tervezés
+3. Implementáció
+4. Tesztelés
+5. Felhasználói dokumentáció
+6. Felhasznált források
+7. Változtatások a második beadandó részein
+8. Kliensoldali fejlesztés
+
+
 ### 1. Követelményanalízis
 
 #### 1.1. Célkitűzés
@@ -223,8 +235,10 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 ##### 2.3.3. Táblakapcsolatok típusaira példák
 ###### 2.3.3.1. EGY-EGY kapcsolat
 * Telephelyek és adataik *(sites - site_infos)*
+
 ###### 2.3.3.2. EGY-SOK kapcsolat
 * Járművek által teljesített túrák *(vehicles-trips)*
+
 ###### 2.3.3.3. SOK-SOK kapcsolat
 * Dolgozók által vezetett járművek *(employees-trips-vehicles)*
 
@@ -343,7 +357,7 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 
 ### 4. Tesztelés
 
-#### 4.1. Minta bejelentkezési adatok teszteléshez
+#### 4.1. Minta bejelentkezési adatok kézi teszteléshez
 
 ##### 4.1.1. Admin bejelentkezés
 - **Felhasználónév:** `Admin`
@@ -352,6 +366,89 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 ##### 4.1.2. Bejelentkezés a többi dolgozóval
 - **Felhasználónév:** a dolgozó felhasználóneve
 - **Jelszó:** `pw`
+
+#### 4.2. Tesztesetek
+* Employee
+    * Dolgozó létrehozása
+    * Dolgozó szerkesztése
+    * Dolgozó aktiválása/inaktiválása
+    * Bejelentkezés jó és rossz jelszóval
+    * Csak azokat az oldalakat láthassa, amihez van joga
+    * Csak azokat a funkciókat használhassa, amihez van joga
+* Vehicle
+    * Jármű létrehozása
+    * Jármű szerkesztése
+    * Jármű aktiválása/inaktiválása
+* Shipment
+    * Szállítmány létrehozása
+    * Szállítmány szerkesztése
+* Túra
+    * Túra létrehozása dolgozó és admin által
+    * Túra lezárása dolgozó és admin által
+    * Túra törlése admin által
+* Listaoldalak
+    * Az adatok megfelelően jelennek meg a táblázatokban
+    * A funkciók eléréséhez megjelennek a gombok a megfelelő helyeken
+* Főoldal
+    * A statisztikai információk jól jelennek meg
+        * Dolgozók által használt járművek
+        * Járművek által teljesített túrák
+
+#### 4.3. Automatizált tesztelés
+Az alkalmazás automatizált tesztelését a Firefoxhoz elérhető Selenium IDE nevű pluginnal végezzük!
+Az automatizált tesztekeket tartalmazó fájlok megtalálhatók a *"test"* mappában!
+
+##### 4.3.1. Automatizált tesztek fájljai
+###### 4.3.1.1. A *"test"* mappában a következő fájlok találhatók:
+* *01_alap_tesztsor.html*
+* *02_jogosultsag_tesztsor.html*
+* *03_folyamat_aktivJS_tesztsor.html*
+
+Ezek mindegyike egy-egy tesztsort tartalmaz, a teszteseteket az almappákból töltik be!
+
+###### 4.3.1.2. A *"test"* mappában a következő mappák találhatók:
+* *01_alap_tesztsor*
+* *02_jogosultsag_tesztsor*
+* *03_folyamat_aktivJS_tesztsor*
+
+Ezek tartalmazzák az egyes tesztsorokhoz tartozó tesztesetek fájljait.
+
+##### 4.3.2. Selenium IDE telepítése
+A plugin a következő oldalon telepíthető: https://addons.mozilla.org/hu/firefox/addon/selenium-ide/
+
+##### 4.3.3. Selenium IDE használata
+1. A Selenium IDE megnyitása után az *"Open Test Suite"* menüponttal be kell tölteni egy tesztsort!
+2. Az ablak baloldalán a *"Test Case"* panelben fel vannak sorolva a tesztsort alkotó tesztesetek. Dupla kattintással lehet másik tesztesetre váltani!
+3. A Base URL mező értéke legyen az alkalmazás URL-jére beállítva! (http://localhost:3333/)
+4. A tesztelés sebességét a Base URL mező alatti csúszkával lehet állítani! A tesztekben el vannak helyezve 1-2 másodperces várakozások a szükséges helyeken, így elvileg a leggyorsabb sebességre állítva is le kell futniuk rendesen a teszteknek!
+5. A *"test"* mappában található összes tesztsor első *("a" betűjelzésű)* tesztesete tartalmaz **a tesztsorra vonatkozó megjegyzéseket**. Ezeket **be kell tartani**, mivel *az elkészített alkalmazás tartalmaz olyan tesztelendő funkciókat, amelyek az adatbázison csak kézi beavatkozással visszafordítható változtatásokat hajtanak végre!*
+6. A *"Play entire test suite"* gomb megnyomásával az egész tesztsor lefut, a tesztesetek a panelen látható sorrendben hajtódnak végre.
+7. A *"Play current test case"* gomb megnyomásával csak a kiválasztott teszteset futtatódik le.
+
+##### 4.3.4. Az adatbázis alaphelyzetbe állítása teszteléshez
+A tesztsorok futtatása előtt az adatbázist alaphelyzetbe kell állítani a következő parancssorozattal:
+
+`./ace migration:refresh; ./ace db:seed;`
+
+##### 4.3.5. A tesztsorok jellemzői
+1. **Alap tesztsor** *(01_alap_tesztsor.html)*
+    * Az adatmegjelenítő oldalakat teszteli.
+    * *Futtatása előtt az adatbázist alaphelyzetbe kell állítani!*
+    * Nem változtat az adatbázis tartalmán, így többször is lefuttatható egymás után az adatbázis alaphelyzetbe állítása nélkül.
+    * A tesztesetek (`1a`, `1b`) futtatási sorrendje mindegy.
+
+2. **Jogosultság tesztsor** *(02_jogosultsag_tesztsor.html)*
+    * Az alkalmazásban bevezetett négy jogkör jogosultságait teszteli.
+    * *Futtatása előtt az adatbázist alaphelyzetbe kell állítani!*
+    * Változtat az adatbázis tartalmán.
+    * A négy teszteset a tesztelés közben módosított adatokra épül, így a **következő sorrendben kell őket futtatni**: `2a`, `2b`, `2c`, `2d`!
+
+3. **Folyamatok aktív Javascripttel tesztsor** *(03_folyamat_aktivJS_tesztsor.html)*
+    * Funkcionális felületi teszteket tartalmaz.
+    * 4 folyamatot tesztel le *(Dolgozók, Járművek, Szállítmányok, Túrák kezelése)*.
+    * *Futtatása előtt az adatbázist alaphelyzetbe kell állítani!*
+    * Változtat az adatbázis tartalmán.
+    * A tesztesetek (`3a`, `3b`, `3c`, `3d`) futtatási sorrendje mindegy, de mindegyik legfeljebb egyszer futtatható helyesen az adatbázis újbóli alaphelyzetbe állítása nélkül!
 
 ### 5. Felhasználói dokumentáció
 #### 5.1. Ajánlott hardver-, szerverkonfiguráció
@@ -452,13 +549,14 @@ Az alkalmazás felhasználói telepítést nem igényel. Szerveroldali telepít�
 * Oldaltérkép részben az "Aktuális túra" alpont törlése, mivel a programban az ottani gomb meg lett szüntetve *(2.1.1. alfejezet)*
 * Könyvtárstruktúra frissítése a harmadik beadandó során bekövetkezett változásokkal *(3.2. alfejezet)*
 * Szerveroldali telepítés lépéseinek leírása *(5.2. alfejezet)*
+
 #### 7.2. Forráskód
 * **list.njk:** az összes `<a>` típusú gomb lecserélése `<form>` típusúra.
 * **index.njk:** az összes `<a>` típusú gomb lecserélése `<form>` típusúra.
 * **new.njk:** *új túra* és *új saját túra* HTML kódjainak összevonása `if` és `elif` elágazásokkal (redundancia csökkentése).
 * **list.njk:** járművek listáinál az *Elérhető* oszlopban a `Nem elérhető` értékek helyett `Foglalt` szerepel.
 * **master.njk:** az eddig is funkció nélküli keresőmező eltüntetése.
-* **Adatbázis:** az *employee* *email* mezőjére nincs megkötés az egyediséget illetően, mivel egy dolgozót a felhasználóneve alapján azonosítunk *(1479658110340_employees.js, Model/Employee.js)*
+* **Adatbázis:** az *employee* *email* mezőjére nincs megkötés az egyediséget illetően, mivel a dolgozókat a felhasználónevük alapján azonosítjuk *(1479658110340_employees.js, Model/Employee.js)*
 * **new.njk, edit.njk:** szállítmány létrehozásánál és szerkesztésénél az űrlapon a *Leírás* mező `<textarea>` lett.
 * Fölösleges (eddig is kikommentelt) kódok kitörölgetése a fájlokból.
 * **ListController.js, IndexController.js:** a `timestampToDate(date)` függvény más formátumban adja vissza a dátumokat, mint eddig.
