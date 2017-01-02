@@ -1,5 +1,5 @@
 # Alkalmazások fejlesztése feladat dokumentációja
-## Cég belső szállítmányozását nyilvántartó rendszer
+## Cég szállítmányozását nyilvántartó rendszer
 
 ### Tartalomjegyzék
 
@@ -17,7 +17,7 @@
 
 #### 1.1. Célkitűzés
 
-A cél olyan program létrehozása, mely egy cég belső szállítmányozását nyilvántartó alkalmazás leegyszerűsített változata. A dolgozók be tudjanak jelentkezni, tudják saját túráikat felvenni, lezárni; továbbá az ehhez szükséges adatok kezelésére (járművek, szállítmányok adatai, stb.) is legyen lehetőség egy admin felhasználó által.
+A cél olyan program létrehozása, mely egy cég szállítmányozását nyilvántartó alkalmazás leegyszerűsített változata. A dolgozók be tudjanak jelentkezni, tudják saját túráikat felvenni, lezárni; továbbá az ehhez szükséges adatok kezelésére (járművek, szállítmányok adatai, stb.) is legyen lehetőség egy admin felhasználó által.
 
 #### 1.2. Követelmények összegyűjtése
 
@@ -216,6 +216,16 @@ A cél olyan program létrehozása, mely egy cég belső szállítmányozását 
 * **GET/inactivate/vehicle/id:** jármű inaktiválása
 * **GET/close/trip/id:** túra lezárása
 * **GET/delete/trip/id:** túra törlése
+* **POST/ajax/activate/employee/id**
+* **POST/ajax/inactivate/employee/id**
+* **POST/ajax/activate/vehicle/id**
+* **POST/ajax/inactivate/vehicle/id**
+* **POST/ajax/close/trip/id**
+* **DELETE/ajax/delete/trip/id**
+* **POST/ajax/login**
+* **GET/ajax/suggest**
+* **GET/ajax/new/employee/validate**
+* **GET/ajax/new/vehicle/validate**
 
 #### 2.2. Felhasználóifelület-modell
 ##### 2.2.1. Oldalvázlatok
@@ -434,7 +444,7 @@ A tesztsorok futtatása előtt az adatbázist alaphelyzetbe kell állítani a k�
 1. **Alap tesztsor** *(01_alap_tesztsor.html)*
     * Az adatmegjelenítő oldalakat teszteli.
     * *Futtatása előtt az adatbázist alaphelyzetbe kell állítani!*
-    * Nem változtat az adatbázis tartalmán, így többször is lefuttatható egymás után az adatbázis alaphelyzetbe állítása nélkül.
+    * Nem változtat az adatbázis tartalmán, így többször is lefuttatható egymás után az adatbázis újbóli alaphelyzetbe állítása nélkül.
     * A tesztesetek (`1a`, `1b`) futtatási sorrendje mindegy.
 
 2. **Jogosultság tesztsor** *(02_jogosultsag_tesztsor.html)*
@@ -571,3 +581,108 @@ Az alkalmazás tartalmaz kliensoldalon futó Javascript kódot is, amivel a felh
 3. Új túra létrehozásánál az űrlapon lévő inputmezők lenyíló listává változnak, amelyek csak a kritériumoknak megfelelő elemek közül engednek választani.
 4. Beviteli mezőkbe írt adatok automatikus ellenőrzése a következő elemek létrehozásánál/szerkesztésénél: *employee, vehicle, shipment*.
 5. Szállítmány létrehozásánál a szállított egységek mennyiségét és megnevezését interaktív gombokkal lehet megadni.
+
+#### 8.1. Az 1. kliensoldali funkció (AJAX-os)
+
+##### 8.1.1. Célja
+Bejelentkezéskor az adatok beírása felugró ablakban, bejelentkezés a teljes oldal újratöltése nélkül.
+
+##### 8.1.2. Érintett fájlok
+* **login.js** *(az új kliensoldali kódot tartalmazza)*
+* routes.js
+* AuthController.js
+* master.njk
+
+##### 8.1.3. Működés részletezése
+1. A *"Bejelentkezés"* linkre kattintunk.
+2. A felugró ablakban beírjuk a bejelentkezési adatokat.
+3. Az űrlap elküldésekor az */ajax/login* végpontra POST kérés küldődik el.
+4. Az *AuthController.js* `ajaxLogin(req, res)` függvénye lefut, ami bejelentkezteti a dolgozót.
+5. Sikeres bejelentkezés után az oldal `.navbar-collapse` és `.container` részei újratöltődnek.
+
+#### 8.2. A 2. kliensoldali funkció (AJAX-os)
+
+##### 8.2.1. Célja
+Dolgozók és járművek aktiválása/inaktiválása, valamint túratörlés és túralezárás végrehajtása előtt megerősítés kérése felugró ablakban.
+
+##### 8.2.2. Érintett fájlok
+* **delete-close-activate.js** *(az új kliensoldali kódot tartalmazza)*
+* routes.js
+* ActivateController.js
+* CloseTripController.js
+* DeleteController.js
+* list.njk
+
+##### 8.2.3. Működés részletezése
+1. Megkeressük a megfelelő listaoldalon a kívánt dolgozót, járművet vagy túrát.
+2. Az *"Aktiválás", "Inaktiválás", "Törlés", "Befejezés"* gombok valamelyikére rákattintunk.
+3. A felugró ablakban megerősítjük szándékunkat az *"OK"* gombbal.
+4. A funkció típusától függően a következő végpontok egyikére küldődik kérés, aminek hatására a jelölt függvények futnak le, melyek elvégzik a módosítást:
+    * *POST/ajax/activate/employee/id*
+        * *ActivateController.js*, `ajaxActivate(req, res)`
+    * *POST/ajax/inactivate/employee/id*
+        * *ActivateController.js*, `ajaxInactivate(req, res)` 
+    * *POST/ajax/activate/vehicle/id*
+        * *ActivateController.js*, `ajaxActivate(req, res)`
+    * *POST/ajax/inactivate/vehicle/id*
+        * *ActivateController.js*, `ajaxInactivate(req, res)` 
+    * *POST/ajax/close/trip/id*
+        * *CloseTripController.js*, `ajaxCloseTrip(req, res)`
+    * *DELETE/ajax/delete/trip/id*
+        * *DeleteController.js*, `ajaxDeleteTrip(req, res)`
+5. Üzenetet kapunk a művelet sikerességéről, majd újratöltődik a listaoldal.
+
+#### 8.3. A 3. kliensoldali funkció (AJAX-os)
+
+##### 8.3.1. Célja
+Új túra létrehozásánál az űrlapon lévő inputmezők lenyíló listává változnak, amelyek csak a kritériumoknak megfelelő elemek közül engednek választani.
+
+##### 8.3.2. Érintett fájlok
+* **suggest.js** *(az új kliensoldali kódot tartalmazza)*
+* routes.js
+* CreateNewController.js
+* new.njk
+
+##### 8.3.3. Működés részletezése
+1. Új túra létrehozására kattintunk.
+2. Az űrlap betöltésekor az */ajax/suggest* végpontra GET kérés küldődik, mely hatására a *CreateNewController.js* `ajaxSuggest(req, res)` függvénye összegyűjti mezőnként a lehetséges beviteli értékeket.
+3. Az űrlapon a mezőkből lenyitható választólisták lesznek a függvény által összegyűjtött értékekkel.
+4. Az űrlap kitöltése után létrehozzuk a túrát.
+
+#### 8.4. A 4. kliensoldali funkció (AJAX-os)
+
+##### 8.4.1. Célja
+Beviteli mezőkbe írt adatok automatikus ellenőrzése a következő elemek létrehozásánál/szerkesztésénél: employee, vehicle, shipment.
+
+##### 8.4.2. Érintett fájlok
+* routes.js
+* CreateNewController.js
+* new.njk
+* edit.njk
+* **validator.min.js** *(külső script)*
+
+##### 8.4.3. Működés részletezése
+1. Employee, vehicle vagy shipment létrehozásakor/szerkesztésekor az űrlapba beírt adatok automatikusan ellenőrzésre kerülnek.
+2. Employee vagy vehicle létrehozásakor a *"Felhasználónév"* / *"Rendszám"* mező kitöltése után GET kérés küldődik a */ajax/new/employee/validate* vagy a */ajax/new/vehicle/validate* végpontra.
+3. A *CreateNewController.js* `ajaxValidateInputs(req, res)` függvénye ellenőrzi, hogy a mezőben megadott felhasználónevet vagy rendszámot felhasználták-e már. Ha igen, hibaüzenetet küld vissza.
+4. Az űrlapba beírt értékeket helyesbítjük a mezőknél megjelenő értesítések szerint.
+
+#### 8.5. Az 5. kliensoldali funkció
+
+##### 8.5.1. Célja
+Szállítmány létrehozásánál a szállított egységek mennyiségét és megnevezését interaktív gombokkal lehet megadni.
+
+##### 8.5.2. Érintett fájlok
+* **createShipment.js** *(az új kliensoldali kódot tartalmazza)*
+* new.njk
+
+##### 8.5.3. Működés részletezése
+1. Új szállítmány létrehozására kattintunk.
+2. Az űrlapon a *Leírás* mezőbe írhatunk kézzel, de a szállítandó egységek mennyiségének és megnevezésének megadását a *Leírás bővítése* szekcióban lévő gombokkal könnyebben elvégezhetjük.
+3. Kattintsunk az *"Új szállított elem"* gombra.
+4. A *createShipment.js* `ujSor(shipmentItem)` függvénye új sort hoz létre az elem számára, ami ezután megjelenik az űrlapon. A baloldali mezőbe a mennyiséget, a jobboldaliba a megnevezést írjuk be!
+5. Az *"Új szállított elem"* gombbal további sorok vehetők fel, a sorok melletti *"Elem törlése"* gombokkal a sorok törölhetők.
+6. Ha végeztünk a sorok felvételével és kitöltésével, az *"Adatok összegzése"* gombra kattintsunk!
+7. A *Leírás* mező eddigi tartalma felülíródik a sorokban megadott adatokkal.
+8. Ezután kézzel írhatunk még a *Leírás* mezőbe, ha szükséges.
+9. Töltsük ki a többi mezőt és a "*Felvétel!*" gombot nyomjuk meg!
