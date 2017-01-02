@@ -649,6 +649,9 @@ Dolgozók és járművek aktiválása/inaktiválása, valamint túratörlés és
 3. Az űrlapon a mezőkből lenyitható választólisták lesznek a függvény által összegyűjtött értékekkel.
 4. Az űrlap kitöltése után létrehozzuk a túrát.
 
+##### 8.3.4. Szekvenciadiagram
+![Usecase](docs/images/sequence.png)
+
 #### 8.4. A 4. kliensoldali funkció (AJAX-os)
 
 ##### 8.4.1. Célja
